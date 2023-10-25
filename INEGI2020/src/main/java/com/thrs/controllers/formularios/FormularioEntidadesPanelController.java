@@ -7,6 +7,7 @@ package com.thrs.controllers.formularios;
 import com.thrs.controllers.PrincipalController;
 import com.thrs.models.Entidad;
 import com.thrs.services.graphicServices.RecursosService;
+import com.thrs.validation.Validar;
 import com.thrs.vistas.panel.formularios.FormularioEntidadesPanelTemplate;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -40,6 +41,9 @@ public class FormularioEntidadesPanelController implements ActionListener, Mouse
     
     public Entidad recuperarDatos(){
         entidad = new Entidad();
+        String idEntidad = formularioEntidadesPanelTemplate.gettIdEntidad().getText();
+        String nomEntidad = formularioEntidadesPanelTemplate.gettNomEntidad().getText();
+        //if(Validar.contieneInformacion(idEntidad) && nomEntidad)
         entidad.setIdEntidad(Integer.parseInt(formularioEntidadesPanelTemplate.gettIdEntidad().getText()));
         entidad.setNomEntidad(formularioEntidadesPanelTemplate.gettNomEntidad().getText());
         

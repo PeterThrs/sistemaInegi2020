@@ -29,6 +29,7 @@ com\thrs\controllers\formularios\FormularioEntidadesPanelController.class
 com\thrs\repository\Censo2020Dao.class
 com\thrs\vistas\panel\formularios\FormularioEntidadesPanelTemplate.class
 com\thrs\repository\LocalidadDao.class
+com\thrs\validation\Validar.class
 com\thrs\vistas\panel\TablaPanelTemplate.class
 com\thrs\services\graphicServices\GraficosAvanzadosService$3.class
 com\thrs\pruebaEntidades.class

@@ -39,42 +39,52 @@ public class BotonesPanelController implements ActionListener, MouseListener, Fo
     @Override
     public void actionPerformed(ActionEvent e) {
 
-        if (e.getSource() == botonesPanelTemplate.getBtnCreate()) {
-            entidad = this.principalController.getFormularioEntidadesPanelController().recuperarDatos();
-            System.out.println("entidad = " + entidad);
-            sEntidad.agregarEntidad(entidad);
-            this.principalController.getTablaEntidadesPanelController().mostrarRegistrosTabla();
+        switch (comando) {
+            case "Entidades":
+                if (e.getSource() == botonesPanelTemplate.getBtnCreate()) {
+                    entidad = this.principalController.getFormularioEntidadesPanelController().recuperarDatos();
+                    System.out.println("entidad = " + entidad);
+                    sEntidad.agregarEntidad(entidad);
+                    //this.principalController.getTablaEntidadesPanelController().mostrarRegistrosTabla();
+                    this.principalController.getTablaEntidadesPanelController().agregarRegistro(entidad);
+                    
+                }
+                if (e.getSource() == botonesPanelTemplate.getBtnUpdate()) {
+                    int filaSeleccionada = principalController.getTablaEntidadesPanelController().filaSeleccionada();
+                    if (filaSeleccionada != -1) {
+                        Entidad entidadNueva = principalController.getFormularioEntidadesPanelController().recuperarDatos();
+                        Entidad entidadAnterior = principalController.getTablaEntidadesPanelController().getEntidad();
+
+                        sEntidad.actualizarEntidad(entidadNueva, entidadAnterior);
+                        //this.principalController.getTablaEntidadesPanelController().mostrarRegistrosTabla();
+                        this.principalController.getTablaEntidadesPanelController().modificarRegistroTabla(entidadNueva);
+                        this.principalController.getFormularioEntidadesPanelController().restaurarValores();
+
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Debes selecionar una fila");
+                    }
+
+                }
+                if (e.getSource() == botonesPanelTemplate.getBtnDelete()) {
+                    Entidad entidadNueva = principalController.getFormularioEntidadesPanelController().recuperarIdEntidad();
+
+                    sEntidad.eliminarEntidad(entidadNueva);
+                    //this.principalController.getTablaEntidadesPanelController().mostrarRegistrosTabla();
+                    this.principalController.getTablaEntidadesPanelController().eliminarRegistroTabla();
+                    this.principalController.getFormularioEntidadesPanelController().restaurarValores();
+
+                }
+
+                break;
 
         }
-        if (e.getSource() == botonesPanelTemplate.getBtnUpdate()) {
-            int filaSeleccionada = principalController.getTablaEntidadesPanelController().filaSeleccionada();
-            if (filaSeleccionada != -1) {
-                Entidad entidadNueva = principalController.getFormularioEntidadesPanelController().recuperarDatos();
-                Entidad entidadAnterior = principalController.getTablaEntidadesPanelController().getEntidad();
 
-                sEntidad.actualizarEntidad(entidadNueva, entidadAnterior);
-                this.principalController.getTablaEntidadesPanelController().mostrarRegistrosTabla();
-                this.principalController.getFormularioEntidadesPanelController().restaurarValores();
-
-            } else {
-                JOptionPane.showMessageDialog(null, "Debes selecionar una fila");
-            }
-
-        }
-        if (e.getSource() == botonesPanelTemplate.getBtnDelete()) {
-            Entidad entidadNueva = principalController.getFormularioEntidadesPanelController().recuperarIdEntidad();
-
-            sEntidad.eliminarEntidad(entidadNueva);
-            this.principalController.getTablaEntidadesPanelController().mostrarRegistrosTabla();
-            this.principalController.getFormularioEntidadesPanelController().restaurarValores();
-
-        }
         if (e.getSource() == botonesPanelTemplate.getBtnClean()) {
             this.principalController.getFormularioEntidadesPanelController().restaurarValores();
         }
         if (e.getSource() == botonesPanelTemplate.getBtnRegresar()) {
             this.principalController.cerrarSesion();
-            return ;
+            return;
         }
 
         mostrarRegistrosTabla();

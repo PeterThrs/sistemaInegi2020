@@ -15,6 +15,7 @@ import java.awt.event.FocusListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
@@ -22,7 +23,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Usuario
  */
-public class TablaEntidadesPanelController implements ActionListener, MouseListener, FocusListener{
+public class TablaEntidadesPanelController implements ActionListener, MouseListener, FocusListener {
 
     private PrincipalController principalController;
     private TablaEntidadesPanelTemplate tablaEntidadesPanelTemplate;
@@ -49,7 +50,6 @@ public class TablaEntidadesPanelController implements ActionListener, MouseListe
 //        principalController.getFormularioEntidadesPanelController()
 //                .getFormularioEntidadesPanelTemplate().getlIdEntidad()
 //                .setText(sEntidad.devolverCantidadEntidad() + "");
-        
 
     }
 
@@ -58,8 +58,46 @@ public class TablaEntidadesPanelController implements ActionListener, MouseListe
                 new Object[]{entidad.getIdEntidad(), entidad.getNomEntidad()}
         );
     }
-    
-    public int filaSeleccionada(){
+
+    public void modificarRegistroTabla(Entidad entidad) {
+        int fSeleccionada = tablaEntidadesPanelTemplate.getTabla().getSelectedRow();
+        if (fSeleccionada != -1) {
+            tablaEntidadesPanelTemplate.getModelo()
+                    .setValueAt(entidad.getIdEntidad(), fSeleccionada, 0);
+            tablaEntidadesPanelTemplate.getModelo()
+                    .setValueAt(entidad.getNomEntidad(), fSeleccionada, 1);
+
+//      amigo = sAmigos.devolverAmigo(fSeleccionada);
+//      amigo.setNombre(amigosTemplate.getTNombre().getText());
+//      amigo.setEdad(amigosTemplate.getTEdad().getText());
+//      amigo.setOficio(amigosTemplate.getTOficio().getText());
+//      amigo.setTelefono(amigosTemplate.getTTelefono().getText());
+//      amigo.setEmail(amigosTemplate.getTEmail().getText());
+        } else {
+            JOptionPane.showMessageDialog(
+                    null,
+                    "seleccione una fila",
+                    "Error",
+                    JOptionPane.ERROR_MESSAGE
+            );
+        }
+    }
+
+    public void eliminarRegistroTabla() {
+        int fSeleccionada = tablaEntidadesPanelTemplate.getTabla().getSelectedRow();
+        if (fSeleccionada != -1) {
+            tablaEntidadesPanelTemplate.getModelo().removeRow(fSeleccionada);
+        } else {
+            JOptionPane.showMessageDialog(
+                    null,
+                    "seleccione una fila",
+                    "Error",
+                    JOptionPane.ERROR_MESSAGE
+            );
+        }
+    }
+
+    public int filaSeleccionada() {
         return tablaEntidadesPanelTemplate.getTabla().getSelectedRow();
     }
 
@@ -69,7 +107,7 @@ public class TablaEntidadesPanelController implements ActionListener, MouseListe
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        
+
     }
 
     public PrincipalController getPrincipalController() {
@@ -83,54 +121,54 @@ public class TablaEntidadesPanelController implements ActionListener, MouseListe
     @Override
     public void mouseClicked(MouseEvent e) {
         if (e.getSource() instanceof JTable) {
-            int filaSeleccionada = principalController.getTablaEntidadesPanelController().filaSeleccionada();
-            
+            int filaSeleccionada = filaSeleccionada();
+
             entidad = new Entidad();
             DefaultTableModel modelo = principalController.getTablaEntidadesPanelController()
                     .getTablaEntidadesPanelTemplate().getModelo();
-            
+
             int idEntidad = (Integer) modelo.getValueAt(filaSeleccionada, 0);
             System.out.println("idEntidad = " + idEntidad);
             String nomEntidad = (String) modelo.getValueAt(filaSeleccionada, 1);
             System.out.println("nomEntidad = " + nomEntidad);
-            
+
             entidad.setIdEntidad(idEntidad);
             entidad.setNomEntidad(nomEntidad);
-            
+
             principalController.getFormularioEntidadesPanelController().cargarDatos(entidad);
-            
+
         }
-        
+
     }
 
     @Override
     public void mousePressed(MouseEvent e) {
-        
+
     }
 
     @Override
     public void mouseReleased(MouseEvent e) {
-        
+
     }
 
     @Override
     public void mouseEntered(MouseEvent e) {
-        
+
     }
 
     @Override
     public void mouseExited(MouseEvent e) {
-        
+
     }
 
     @Override
     public void focusGained(FocusEvent e) {
-        
+
     }
 
     @Override
     public void focusLost(FocusEvent e) {
-        
+
     }
 
     public List<Entidad> getEntidades() {
@@ -140,7 +178,5 @@ public class TablaEntidadesPanelController implements ActionListener, MouseListe
     public Entidad getEntidad() {
         return entidad;
     }
-    
-    
 
 }
