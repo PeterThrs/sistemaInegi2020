@@ -4,6 +4,9 @@
  */
 package com.thrs.validation;
 
+import com.thrs.models.Entidad;
+import java.util.List;
+
 /**
  *
  * @author Usuario
@@ -19,8 +22,29 @@ public class Validar {
             int numero = Integer.parseInt(cadena);
             return true;
         } catch (Exception ex){
-            ex.printStackTrace();
+            //ex.printStackTrace();
         }
         return false;
     }
+    
+    public static <T, N>boolean objectosIguales(T t, N n){
+        return t.equals(n);
+    }
+    
+    public static <T,E>boolean existeElemento(List<T> t, E e){
+        return t.contains(e);
+    }
+    
+    public static boolean compararIdEntidad(List<Entidad> entidades, Entidad entidad){
+        boolean bandera = false;
+        for(Entidad e: entidades){
+            if(e.getIdEntidad() == entidad.getIdEntidad()){
+                bandera = true;
+                break;
+            }
+        }
+        return bandera;
+        
+    }
+    
 }
