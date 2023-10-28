@@ -46,10 +46,6 @@ public class TablaEntidadesPanelController implements ActionListener, MouseListe
         entidades.forEach(ent -> {
             this.agregarRegistro(ent);
         });
-        //this.tablaEntidadesPanelTemplate.getTabla().setRowHeight(25);
-//        principalController.getFormularioEntidadesPanelController()
-//                .getFormularioEntidadesPanelTemplate().getlIdEntidad()
-//                .setText(sEntidad.devolverCantidadEntidad() + "");
 
     }
 
@@ -66,13 +62,7 @@ public class TablaEntidadesPanelController implements ActionListener, MouseListe
                     .setValueAt(entidad.getIdEntidad(), fSeleccionada, 0);
             tablaEntidadesPanelTemplate.getModelo()
                     .setValueAt(entidad.getNomEntidad(), fSeleccionada, 1);
-
-//      amigo = sAmigos.devolverAmigo(fSeleccionada);
-//      amigo.setNombre(amigosTemplate.getTNombre().getText());
-//      amigo.setEdad(amigosTemplate.getTEdad().getText());
-//      amigo.setOficio(amigosTemplate.getTOficio().getText());
-//      amigo.setTelefono(amigosTemplate.getTTelefono().getText());
-//      amigo.setEmail(amigosTemplate.getTEmail().getText());
+            
         } else {
             JOptionPane.showMessageDialog(
                     null,
@@ -95,6 +85,9 @@ public class TablaEntidadesPanelController implements ActionListener, MouseListe
                     JOptionPane.ERROR_MESSAGE
             );
         }
+    }
+    
+    public void deseleccionarElemento(){
     }
 
     public int filaSeleccionada() {
@@ -128,9 +121,7 @@ public class TablaEntidadesPanelController implements ActionListener, MouseListe
                     .getTablaEntidadesPanelTemplate().getModelo();
 
             int idEntidad = (Integer) modelo.getValueAt(filaSeleccionada, 0);
-            System.out.println("idEntidad = " + idEntidad);
             String nomEntidad = (String) modelo.getValueAt(filaSeleccionada, 1);
-            System.out.println("nomEntidad = " + nomEntidad);
 
             entidad.setIdEntidad(idEntidad);
             entidad.setNomEntidad(nomEntidad);

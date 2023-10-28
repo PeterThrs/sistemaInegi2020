@@ -4,9 +4,11 @@
  */
 package com.thrs.controllers;
 
+import static com.thrs.Mensaje.*;
 import com.thrs.models.Entidad;
 import com.thrs.services.EntidadService;
 import com.thrs.services.graphicServices.RecursosService;
+import static com.thrs.validation.Validar.*;
 import com.thrs.vistas.panel.BotonesPanelTemplate;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -14,8 +16,8 @@ import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.List;
 import javax.swing.JButton;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -25,9 +27,11 @@ public class BotonesPanelController implements ActionListener, MouseListener, Fo
 
     private PrincipalController principalController;
     private BotonesPanelTemplate botonesPanelTemplate;
-    private Entidad entidad;
+    private Entidad entidadRecuperada;
+    private Entidad entidadAnterior;
     private EntidadService sEntidad;
     private String comando;
+    private List<Entidad> entidades;
 
     public BotonesPanelController(PrincipalController principalController, String comando) {
         this.principalController = principalController;
@@ -38,60 +42,144 @@ public class BotonesPanelController implements ActionListener, MouseListener, Fo
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        int filaSeleccionada = principalController.getTablaEntidadesPanelController().filaSeleccionada();
+        entidades = sEntidad.getEntidades();
 
-        switch (comando) {
-            case "Entidades":
-                if (e.getSource() == botonesPanelTemplate.getBtnCreate()) {
-                    entidad = this.principalController.getFormularioEntidadesPanelController().recuperarDatos();
-                    System.out.println("entidad = " + entidad);
-                    sEntidad.agregarEntidad(entidad);
-                    //this.principalController.getTablaEntidadesPanelController().mostrarRegistrosTabla();
-                    this.principalController.getTablaEntidadesPanelController().agregarRegistro(entidad);
-                    
-                }
-                if (e.getSource() == botonesPanelTemplate.getBtnUpdate()) {
-                    int filaSeleccionada = principalController.getTablaEntidadesPanelController().filaSeleccionada();
-                    if (filaSeleccionada != -1) {
-                        Entidad entidadNueva = principalController.getFormularioEntidadesPanelController().recuperarDatos();
-                        Entidad entidadAnterior = principalController.getTablaEntidadesPanelController().getEntidad();
+        //insertar un elemento
+        if (e.getSource() == botonesPanelTemplate.getBtnCreate()) {
+            insert();
+        }
 
-                        sEntidad.actualizarEntidad(entidadNueva, entidadAnterior);
-                        //this.principalController.getTablaEntidadesPanelController().mostrarRegistrosTabla();
-                        this.principalController.getTablaEntidadesPanelController().modificarRegistroTabla(entidadNueva);
-                        this.principalController.getFormularioEntidadesPanelController().restaurarValores();
-
-                    } else {
-                        JOptionPane.showMessageDialog(null, "Debes selecionar una fila");
-                    }
-
-                }
-                if (e.getSource() == botonesPanelTemplate.getBtnDelete()) {
-                    Entidad entidadNueva = principalController.getFormularioEntidadesPanelController().recuperarIdEntidad();
-
-                    sEntidad.eliminarEntidad(entidadNueva);
-                    //this.principalController.getTablaEntidadesPanelController().mostrarRegistrosTabla();
-                    this.principalController.getTablaEntidadesPanelController().eliminarRegistroTabla();
-                    this.principalController.getFormularioEntidadesPanelController().restaurarValores();
-
-                }
-
-                break;
+        //actualizar un elemento
+        if (e.getSource() == botonesPanelTemplate.getBtnUpdate()) {
+            if (filaSeleccionada == -1) {
+                mensajeAdvertencia("Debes seleccionar un campo de la tabla");
+                return;
+            }
+            update();
 
         }
 
+        //eliminar un elemento
+        if (e.getSource() == botonesPanelTemplate.getBtnDelete()) {
+            if (filaSeleccionada == -1) {
+                mensajeAdvertencia("Debes seleccionar un campo de la tabla");
+                return;
+            }
+            delete();
+        }
+
+        //limpiar el formulario 
         if (e.getSource() == botonesPanelTemplate.getBtnClean()) {
             this.principalController.getFormularioEntidadesPanelController().restaurarValores();
         }
+
+        //regresar a la ventana anterior
         if (e.getSource() == botonesPanelTemplate.getBtnRegresar()) {
             this.principalController.cerrarSesion();
-            return;
         }
-
-        mostrarRegistrosTabla();
 
     }
 
-    public void mostrarRegistrosTabla() {
+    private void insert() {
+        try {
+            switch (this.comando) {
+                case "Entidades":
+
+                    this.entidadRecuperada = this.principalController.getFormularioEntidadesPanelController().recuperarDatos();
+                    if (compararIdEntidad(this.entidades, entidadRecuperada) || existeElemento(entidades, entidadRecuperada)) {
+                        mensajeError("Ya existe el ID de entidad");
+                        return;
+                    }
+                    this.sEntidad.agregarEntidad(entidadRecuperada);
+                    this.principalController.getTablaEntidadesPanelController().mostrarRegistrosTabla();
+                    this.principalController.getFormularioEntidadesPanelController().restaurarValores();
+                    mensajeInformativo("Entidad Insertada correctamente");
+
+                    break;
+                case "Municipios":
+                    break;
+                case "Localidades":
+                    break;
+                case "Censo 2020":
+                    break;
+                case "Poblacion Edad":
+                    break;
+            }
+
+        } catch (Exception ex) {
+            mensajeError(ex.getMessage());
+        }
+
+    }
+
+    private void update() {
+
+        try {
+            switch (this.comando) {
+                case "Entidades":
+
+                    this.entidadRecuperada = principalController.getFormularioEntidadesPanelController().recuperarDatos();
+                    this.entidadAnterior = principalController.getTablaEntidadesPanelController().getEntidad();
+                    if (existeElemento(entidades, entidadRecuperada)) {
+                        mensajeError("Ya existe el ID de entidad");
+                        return;
+                    }
+                    if (compararIdEntidad(this.entidades, entidadRecuperada) || existeElemento(entidades, entidadRecuperada)) {
+                        mensajeError("Ya existe el ID de entidad al que quiere actualizar");
+                        return;
+                    }
+                    sEntidad.actualizarEntidad(entidadRecuperada, entidadAnterior);
+                    this.principalController.getTablaEntidadesPanelController().mostrarRegistrosTabla();
+                    this.principalController.getFormularioEntidadesPanelController().restaurarValores();
+                    mensajeInformativo("Entidad modificada correctamente");
+
+                    break;
+                case "Municipios":
+                    break;
+                case "Localidades":
+                    break;
+                case "Censo 2020":
+                    break;
+                case "Poblacion Edad":
+                    break;
+            }
+        } catch (Exception ex) {
+            mensajeError(ex.getMessage());
+        }
+
+    }
+
+    private void delete() {
+
+        try {
+            switch (this.comando) {
+                case "Entidades":
+
+                    this.entidadAnterior = principalController.getTablaEntidadesPanelController().getEntidad();
+                    this.entidadRecuperada = this.principalController.getFormularioEntidadesPanelController().recuperarDatos();
+                    if (!objectosIguales(entidadAnterior, entidadRecuperada)) {
+                        mensajeError("No debe modificar el campo");
+                        return;
+                    }
+                    sEntidad.eliminarEntidad(entidadRecuperada);
+                    this.principalController.getTablaEntidadesPanelController().mostrarRegistrosTabla();
+                    this.principalController.getFormularioEntidadesPanelController().restaurarValores();
+                    mensajeInformativo("Entidad Elimina correctamente");
+
+                    break;
+                case "Municipios":
+                    break;
+                case "Localidades":
+                    break;
+                case "Censo 2020":
+                    break;
+                case "Poblacion Edad":
+                    break;
+            }
+        } catch (Exception ex) {
+            mensajeError(ex.getMessage());
+        }
 
     }
 

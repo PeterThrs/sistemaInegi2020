@@ -50,8 +50,6 @@ public class PrincipalController {
     }
 
     public void mostrarContenido() {
-        System.out.println("comando: " + this.comando);
-
         //Agregamos el titulo
         principalTemplate.getpTitulo().removeAll();
         gbc = sObjGraficos.getGridBagConstraints(0, 0, 1, 1, 1, 1, GridBagConstraints.BOTH, GridBagConstraints.CENTER, new Insets(0, 0, 0, 0), 0, 0);
@@ -114,7 +112,6 @@ public class PrincipalController {
     }
 
     public FormularioEntidadesPanelController getFormularioEntidadesPanelController() {
-        System.out.println("formularioEntidadesPanelController = " + formularioEntidadesPanelController == null);
         return formularioEntidadesPanelController;
     }
 

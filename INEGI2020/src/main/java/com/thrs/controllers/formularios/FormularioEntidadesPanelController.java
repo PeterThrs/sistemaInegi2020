@@ -33,17 +33,31 @@ public class FormularioEntidadesPanelController implements ActionListener, Mouse
 
     }
     
-    public Entidad recuperarIdEntidad(){
+    public Entidad recuperarIdEntidad()throws Exception{
+        
+        String idEntidad = formularioEntidadesPanelTemplate.gettIdEntidad().getText();
+        if(!Validar.contieneInformacion(idEntidad)){
+            throw new Exception("Los campos estan vacios");
+        }
+        if(!Validar.esNumero(idEntidad)){
+            throw new Exception("El campo IdEntidad debe ser numero");
+        }
+        
         entidad = new Entidad();
         entidad.setIdEntidad(Integer.parseInt(formularioEntidadesPanelTemplate.gettIdEntidad().getText()));
         return entidad; 
     }
     
-    public Entidad recuperarDatos(){
+    public Entidad recuperarDatos()throws Exception{
         entidad = new Entidad();
         String idEntidad = formularioEntidadesPanelTemplate.gettIdEntidad().getText();
         String nomEntidad = formularioEntidadesPanelTemplate.gettNomEntidad().getText();
-        //if(Validar.contieneInformacion(idEntidad) && nomEntidad)
+        if(!Validar.contieneInformacion(idEntidad) || !Validar.contieneInformacion(nomEntidad) ){
+            throw new Exception("Los campos estan vacios");
+        }
+        if(!Validar.esNumero(idEntidad)){
+            throw new Exception("El campo IdEntidad debe ser numero");
+        }
         entidad.setIdEntidad(Integer.parseInt(formularioEntidadesPanelTemplate.gettIdEntidad().getText()));
         entidad.setNomEntidad(formularioEntidadesPanelTemplate.gettNomEntidad().getText());
         

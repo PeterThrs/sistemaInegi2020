@@ -32,6 +32,7 @@ com\thrs\repository\LocalidadDao.class
 com\thrs\validation\Validar.class
 com\thrs\vistas\panel\TablaPanelTemplate.class
 com\thrs\services\graphicServices\GraficosAvanzadosService$3.class
+com\thrs\Mensaje.class
 com\thrs\pruebaEntidades.class
 com\thrs\models\Municipio.class
 com\thrs\services\graphicServices\GraficosAvanzadosService.class

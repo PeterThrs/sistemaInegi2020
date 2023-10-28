@@ -66,9 +66,9 @@ public class PrincipalTemplate extends JFrame{
         //configuracion ventana al 100%
         GraphicsEnvironment env = GraphicsEnvironment.getLocalGraphicsEnvironment();
         Rectangle bounds = env.getMaximumWindowBounds();
-        this.setResizable(false);
-        this.setUndecorated(true);
-        this.setBounds(bounds);
+        ///this.setResizable(false);
+        //this.setUndecorated(true);
+        //this.setBounds(bounds);
         
         this.setLayout(new GridBagLayout());
         
