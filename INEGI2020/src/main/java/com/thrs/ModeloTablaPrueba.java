@@ -4,6 +4,7 @@
  */
 package com.thrs;
 
+import com.thrs.TableModels.ModelEntidad;
 import com.thrs.models.Entidad;
 import java.awt.BorderLayout;
 import java.awt.event.AdjustmentEvent;
@@ -22,41 +23,6 @@ import javax.swing.JTable;
  * @author Usuario
  */
 public class ModeloTablaPrueba extends JFrame {
-//    public static void main(String[] args) {
-//        List<Entidad> listaUsuarios = new ArrayList<>();
-//        for (int i = 1; i <= 1000; i++) {
-//            listaUsuarios.add(new Entidad(i, "Usuario " + i));
-//        }
-//        List<String> titulos = new ArrayList<>();
-//        titulos.add("id");
-//        titulos.add("entidad");
-//        ModeloTablaEntidades modelo = new ModeloTablaEntidades(listaUsuarios,titulos, 20); // Vista para 20 filas
-//
-//        JTable tabla = new JTable(modelo);
-//        JScrollPane scrollPane = new JScrollPane(tabla);
-//
-//        JFrame frame = new JFrame();
-//        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//        frame.setLayout(new BorderLayout());
-//        frame.add(scrollPane, BorderLayout.CENTER);
-//        frame.setSize(400, 300);
-//        frame.setVisible(true);
-//        
-//        // Agregar AdjustmentListener al JScrollPane
-//        scrollPane.getVerticalScrollBar().addAdjustmentListener(new AdjustmentListener() {
-//            @Override
-//            public void adjustmentValueChanged(AdjustmentEvent e) {
-//                int scrollValue = e.getValue();
-//                int visibleAmount = e.getAdjustable().getVisibleAmount();
-//                int maximum = e.getAdjustable().getMaximum();
-//                int extent = e.getAdjustable().getMaximum() - e.getAdjustable().getVisibleAmount();
-//                if (scrollValue + visibleAmount >= maximum - extent) { // Si el scroll está cerca del final
-//                    modelo.loadMoreData(0, modelo.getRowCount() - 1);
-//                }
-//            }
-//        });
-//        
-//    }
 
     public static void main(String[] args) {
         List<Entidad> entidades = new ArrayList<>();
@@ -67,7 +33,9 @@ public class ModeloTablaPrueba extends JFrame {
 
         String[] columnNames = {"Id", "Valor"};
 
-        ModelEntidad model = new ModelEntidad(entidades, columnNames);
+        ModelEntidad model = new ModelEntidad();
+        model.setColumnIdentifiers(columnNames);
+        model.agregarData(entidades);
         JTable table = new JTable(model);
 
         JButton prevButton = new JButton("Anterior");

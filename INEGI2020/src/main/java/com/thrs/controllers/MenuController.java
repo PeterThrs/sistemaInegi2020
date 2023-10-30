@@ -1,5 +1,6 @@
 package com.thrs.controllers;
 
+import com.thrs.models.CatalogoEnum;
 import com.thrs.services.graphicServices.RecursosService;
 import com.thrs.vistas.MenuTemplate;
 import java.awt.event.ActionEvent;
@@ -9,6 +10,8 @@ import java.awt.event.FocusListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import javax.swing.JButton;
+
+import static com.thrs.models.CatalogoEnum.*;
 
 public class MenuController implements ActionListener, MouseListener, FocusListener {
 
@@ -27,19 +30,19 @@ public class MenuController implements ActionListener, MouseListener, FocusListe
     @Override
     public void mouseClicked(MouseEvent e) {
         if (e.getSource() == menuTemplate.getBtnEntidad()) {
-            entrar("Entidades");
+            entrar(ENTIDAD);
         }
         if (e.getSource() == menuTemplate.getBtnMunicipio()) {
-            entrar("Municipios");
+            entrar(MUNICIPIO);
         }
         if (e.getSource() == menuTemplate.getBtnLocalidad()) {
-            entrar("Localidades");
+            entrar(LOCALIDAD);
         }
         if (e.getSource() == menuTemplate.getBtnCenso()) {
-            entrar("Censo 2020");
+            entrar(CENSO_2020);
         }
         if (e.getSource() == menuTemplate.getBtnPoblacion()) {
-            entrar("Poblacion Edad");
+            entrar(POBLACION_EDAD);
         }
         if (e.getSource() == menuTemplate.getBtnSalir()) {
             System.exit(0);
@@ -62,7 +65,7 @@ public class MenuController implements ActionListener, MouseListener, FocusListe
         }
     }
 
-    public void entrar(String comando) {
+    public void entrar(CatalogoEnum comando) {
 
         if (principalController == null) {
             this.principalController = new PrincipalController(this);

@@ -4,6 +4,7 @@
  */
 package com.thrs.vistas.panel.tabla;
 
+import com.thrs.TableModels.ModelEntidad;
 import com.thrs.controllers.tabla.TablaEntidadesPanelController;
 import com.thrs.services.graphicServices.GraficosAvanzadosService;
 import com.thrs.services.graphicServices.ObjGraficosService;
@@ -13,6 +14,7 @@ import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -36,7 +38,9 @@ public class TablaEntidadesPanelTemplate extends JPanel {
     private JPanel pCorner;
     private JTable tabla;
     private JTableHeader header;
-    private DefaultTableModel modelo;
+    private JButton btnAnterior, btnSiguiente;
+    //private DefaultTableModel modelo;
+    private ModelEntidad modelo;
     private String[] cabecera = {"Id Entidad", "Nombre de Entidad"};
 
     public TablaEntidadesPanelTemplate(TablaEntidadesPanelController tablaEntidadesPanelController) {
@@ -59,7 +63,7 @@ public class TablaEntidadesPanelTemplate extends JPanel {
 
     public void crearJTable() {
 
-        modelo = new DefaultTableModel();
+        modelo = new ModelEntidad();
         modelo.setColumnIdentifiers(cabecera);
 
         tabla = new JTable();
@@ -112,8 +116,46 @@ public class TablaEntidadesPanelTemplate extends JPanel {
         pTabla.setCorner(JScrollPane.UPPER_RIGHT_CORNER, pCorner);
         this.add(pTabla);
 
-        gbc = sObjGraficos.getGridBagConstraints(0, 0, 1, 1, 1, 1, GridBagConstraints.BOTH, GridBagConstraints.CENTER, new Insets(0, 0, 0, 0), 0, 0);
+        gbc = sObjGraficos.getGridBagConstraints(0, 0, 2, 1, 1, 1, GridBagConstraints.BOTH, GridBagConstraints.CENTER, new Insets(0, 0, 0, 0), 0, 0);
         this.add(pTabla, gbc);
+        
+        //Creamos los botones de control 
+        
+        // BOTÓN ANTERIOR--------------------------------------------------------------------
+        btnAnterior = sObjGraficos.construirJButton(
+                "Anterior",
+                300, 145, 120, 35,
+                sRecursos.getCMano(),
+                null,
+                sRecursos.getFontMediana(),
+                sRecursos.getColorPrincipal(),
+                Color.WHITE,
+                null,
+                "c",
+                true
+        );
+        btnAnterior.addMouseListener(tablaEntidadesPanelController);
+        btnAnterior.addActionListener(tablaEntidadesPanelController);
+        gbc = sObjGraficos.getGridBagConstraints(0, 1, 1, 1, 1, 0, GridBagConstraints.HORIZONTAL, GridBagConstraints.CENTER, new Insets(0, 0, 0, 0), 0, 10);
+        this.add(btnAnterior, gbc);
+
+        // BOTÓN SIGUIENTE--------------------------------------------------------------------
+        btnSiguiente = sObjGraficos.construirJButton(
+                "Siguiente",
+                440, 145, 120, 35,
+                sRecursos.getCMano(),
+                null,
+                sRecursos.getFontMediana(),
+                sRecursos.getColorPrincipal(),
+                Color.WHITE,
+                null,
+                "c",
+                true
+        );
+        btnSiguiente.addMouseListener(tablaEntidadesPanelController);
+        btnSiguiente.addActionListener(tablaEntidadesPanelController);
+        gbc = sObjGraficos.getGridBagConstraints(1, 1, 1, 1, 1, 0, GridBagConstraints.HORIZONTAL, GridBagConstraints.CENTER, new Insets(0, 0, 0, 0), 0, 10);
+        this.add(btnSiguiente, gbc);
 
     }
 
@@ -145,12 +187,22 @@ public class TablaEntidadesPanelTemplate extends JPanel {
         return header;
     }
 
-    public DefaultTableModel getModelo() {
+    public ModelEntidad getModelo() {
         return modelo;
     }
 
     public String[] getCabecera() {
         return cabecera;
     }
+
+    public JButton getBtnAnterior() {
+        return btnAnterior;
+    }
+
+    public JButton getBtnSiguiente() {
+        return btnSiguiente;
+    }
+    
+    
 
 }

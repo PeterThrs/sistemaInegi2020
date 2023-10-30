@@ -2,12 +2,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package com.thrs;
+package com.thrs.TableModels;
 
 import com.thrs.models.Entidad;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
-import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -15,29 +14,23 @@ import javax.swing.table.DefaultTableModel;
  */
 public class ModelEntidad extends AbstractTableModel {
 
-    private static final int PAGE_SIZE = 10;
+    private static final int PAGE_SIZE = 20;
     private List<Entidad> entidades;
     private String[] columnNames;
     private int currentPage;
 
-    public ModelEntidad(List<Entidad> entidades, String[] columnNames) {
-        this.entidades = entidades;
-        this.columnNames = columnNames;
+    public ModelEntidad() {
         this.currentPage = 0;
     }
 
-//    public void nextPage() {
-//        currentPage++;
-//        fireTableDataChanged();
-//    }
-//
-//    public void previousPage() {
-//        currentPage--;
-//        if (currentPage < 0) {
-//            currentPage = 0;
-//        }
-//        fireTableDataChanged();
-//    }
+    public void setColumnIdentifiers(String[] columnNames) {
+        this.columnNames = columnNames;
+    }
+
+    public void agregarData(List<Entidad> entidades) {
+        this.entidades = entidades;
+    }
+
     public void nextPage() {
         currentPage++;
         if (currentPage * PAGE_SIZE >= entidades.size()) {
@@ -87,6 +80,13 @@ public class ModelEntidad extends AbstractTableModel {
         return null;
     }
 
+    public void limpiarDatos() {
+        if (entidades != null) {
+            entidades.clear();
+            fireTableDataChanged();
+        }
+    }
+
     public int getCurrentPage() {
         return currentPage;
     }
@@ -94,7 +94,5 @@ public class ModelEntidad extends AbstractTableModel {
     public static int getPAGE_SIZE() {
         return PAGE_SIZE;
     }
-    
-    
 
 }

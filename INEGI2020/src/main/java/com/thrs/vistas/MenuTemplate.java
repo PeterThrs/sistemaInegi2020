@@ -9,16 +9,12 @@ import com.thrs.services.graphicServices.GraficosAvanzadosService;
 import com.thrs.services.graphicServices.ObjGraficosService;
 import com.thrs.services.graphicServices.RecursosService;
 import java.awt.Color;
-import java.awt.Cursor;
-import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
-import java.util.Arrays;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -316,12 +312,5 @@ public class MenuTemplate extends JFrame {
         return lCatalogo;
     }
 
-    public String getIndieFlower() {
-        return indieFlower;
-    }
-
-    public String getJet() {
-        return jet;
-    }
-
+    
 }

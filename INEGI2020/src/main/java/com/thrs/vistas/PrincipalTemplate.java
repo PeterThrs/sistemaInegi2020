@@ -74,11 +74,15 @@ public class PrincipalTemplate extends JFrame{
         
         componentes();
         
-        this.setVisible(true);
+        //this.setVisible(true);
     }
     
     private void componentes(){
         paneles();
+    }
+    
+    public void setEstado(boolean estado){
+        this.setVisible(estado);
     }
     
     private void paneles(){

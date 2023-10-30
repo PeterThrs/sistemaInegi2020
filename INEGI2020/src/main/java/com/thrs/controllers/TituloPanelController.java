@@ -4,6 +4,7 @@
  */
 package com.thrs.controllers;
 
+import com.thrs.models.CatalogoEnum;
 import com.thrs.vistas.panel.TituloPanelTemplate;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -19,9 +20,9 @@ public class TituloPanelController extends MouseAdapter implements ActionListene
     private PrincipalController principalController;
     private TituloPanelTemplate tituloPanelTemplate;
     
-    public TituloPanelController(PrincipalController principalController, String titulo){
+    public TituloPanelController(PrincipalController principalController, CatalogoEnum titulo){
         this.principalController = principalController;
-        this.tituloPanelTemplate = new TituloPanelTemplate(this, titulo);
+        this.tituloPanelTemplate = new TituloPanelTemplate(this, titulo.getValor());
     }
 
     @Override

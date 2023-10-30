@@ -5,6 +5,8 @@
 package com.thrs.controllers;
 
 import static com.thrs.Mensaje.*;
+import com.thrs.models.CatalogoEnum;
+import static com.thrs.models.CatalogoEnum.*;
 import com.thrs.models.Entidad;
 import com.thrs.services.EntidadService;
 import com.thrs.services.graphicServices.RecursosService;
@@ -30,13 +32,13 @@ public class BotonesPanelController implements ActionListener, MouseListener, Fo
     private Entidad entidadRecuperada;
     private Entidad entidadAnterior;
     private EntidadService sEntidad;
-    private String comando;
+    private CatalogoEnum comando;
     private List<Entidad> entidades;
 
-    public BotonesPanelController(PrincipalController principalController, String comando) {
+    public BotonesPanelController(PrincipalController principalController, CatalogoEnum comando) {
         this.principalController = principalController;
         this.comando = comando;
-        this.botonesPanelTemplate = new BotonesPanelTemplate(this, this.comando);
+        this.botonesPanelTemplate = new BotonesPanelTemplate(this, this.comando.getValor());
         this.sEntidad = sEntidad.getService();
     }
 
@@ -84,7 +86,7 @@ public class BotonesPanelController implements ActionListener, MouseListener, Fo
     private void insert() {
         try {
             switch (this.comando) {
-                case "Entidades":
+                case ENTIDAD:
 
                     this.entidadRecuperada = this.principalController.getFormularioEntidadesPanelController().recuperarDatos();
                     if (compararIdEntidad(this.entidades, entidadRecuperada) || existeElemento(entidades, entidadRecuperada)) {
@@ -97,13 +99,13 @@ public class BotonesPanelController implements ActionListener, MouseListener, Fo
                     mensajeInformativo("Entidad Insertada correctamente");
 
                     break;
-                case "Municipios":
+                case MUNICIPIO:
                     break;
-                case "Localidades":
+                case LOCALIDAD:
                     break;
-                case "Censo 2020":
+                case CENSO_2020:
                     break;
-                case "Poblacion Edad":
+                case POBLACION_EDAD:
                     break;
             }
 
@@ -117,7 +119,7 @@ public class BotonesPanelController implements ActionListener, MouseListener, Fo
 
         try {
             switch (this.comando) {
-                case "Entidades":
+                case ENTIDAD:
 
                     this.entidadRecuperada = principalController.getFormularioEntidadesPanelController().recuperarDatos();
                     this.entidadAnterior = principalController.getTablaEntidadesPanelController().getEntidad();
@@ -135,13 +137,13 @@ public class BotonesPanelController implements ActionListener, MouseListener, Fo
                     mensajeInformativo("Entidad modificada correctamente");
 
                     break;
-                case "Municipios":
+                case MUNICIPIO:
                     break;
-                case "Localidades":
+                case LOCALIDAD:
                     break;
-                case "Censo 2020":
+                case CENSO_2020:
                     break;
-                case "Poblacion Edad":
+                case POBLACION_EDAD:
                     break;
             }
         } catch (Exception ex) {
@@ -154,7 +156,7 @@ public class BotonesPanelController implements ActionListener, MouseListener, Fo
 
         try {
             switch (this.comando) {
-                case "Entidades":
+                case ENTIDAD:
 
                     this.entidadAnterior = principalController.getTablaEntidadesPanelController().getEntidad();
                     this.entidadRecuperada = this.principalController.getFormularioEntidadesPanelController().recuperarDatos();
@@ -168,13 +170,13 @@ public class BotonesPanelController implements ActionListener, MouseListener, Fo
                     mensajeInformativo("Entidad Elimina correctamente");
 
                     break;
-                case "Municipios":
+                case MUNICIPIO:
                     break;
-                case "Localidades":
+                case LOCALIDAD:
                     break;
-                case "Censo 2020":
+                case CENSO_2020:
                     break;
-                case "Poblacion Edad":
+                case POBLACION_EDAD:
                     break;
             }
         } catch (Exception ex) {
