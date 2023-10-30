@@ -73,7 +73,7 @@ public class FormularioEntidadesPanelTemplate extends JPanel {
 
         // LABEL ESLOGAN ----------------------------------------------------------------
         lEslogan = sObjGraficos.construirJLabel(
-                "<html>A continuación puede ver y editar<br> la información del Contacto<html>",
+                "<html>A continuación puede ver y editar<br> la información de las Entidades<html>",
                 20, 50, 180, 90,
                 null, null,
                 sRecursos.getFontLigera(),
