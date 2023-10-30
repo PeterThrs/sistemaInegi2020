@@ -6,11 +6,14 @@ package com.thrs.controllers;
 
 import com.thrs.controllers.formularios.FormularioEntidadesPanelController;
 import com.thrs.controllers.tabla.TablaEntidadesPanelController;
+import com.thrs.models.CatalogoEnum;
 import com.thrs.services.graphicServices.ObjGraficosService;
 import com.thrs.vistas.PrincipalTemplate;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+
+import static com.thrs.models.CatalogoEnum.*;
 
 /**
  *
@@ -27,21 +30,22 @@ public class PrincipalController {
     private GridBagConstraints gbc;
     private ObjGraficosService sObjGraficos;
 
-    private String comando;
+    private CatalogoEnum comando;
 
     public PrincipalController(MenuController menuController) {
         this.menuController = menuController;
     }
 
     private void crearObjetos() {
-        this.principalTemplate = new PrincipalTemplate(this);
+        
         this.tituloPanelController = new TituloPanelController(this, this.comando);
         this.tablaEntidadesPanelController = new TablaEntidadesPanelController(this);
         this.formularioEntidadesPanelController = new FormularioEntidadesPanelController(this);
         this.botonesPanelController = new BotonesPanelController(this, this.comando);
         this.sObjGraficos = ObjGraficosService.getService();
-
+        
         this.gbc = new GridBagConstraints();
+        this.principalTemplate = new PrincipalTemplate(this);
     }
 
     public void cerrarSesion() {
@@ -57,7 +61,7 @@ public class PrincipalController {
                 .add(tituloPanelController.getTituloPanelTemplate(), gbc);
 
         switch (this.comando) {
-            case "Entidades":
+            case ENTIDAD:
                 //Agregamos la Tabla
                 principalTemplate.getpTabla().removeAll();
                 gbc = sObjGraficos.getGridBagConstraints(0, 0, 1, 1, 1, 1, GridBagConstraints.BOTH, GridBagConstraints.CENTER, new Insets(0, 0, 0, 0), 0, 0);
@@ -72,13 +76,13 @@ public class PrincipalController {
                 principalTemplate.getpDatos().add(formularioEntidadesPanelController.getFormularioEntidadesPanelTemplate(), gbc);
 
                 break;
-            case "Municipios":
+            case MUNICIPIO:
                 break;
-            case "Localidades":
+            case LOCALIDAD:
                 break;
-            case "Censo 2020":
+            case CENSO_2020:
                 break;
-            case "Poblacion Edad":
+            case POBLACION_EDAD:
                 break;
         }
 
@@ -88,6 +92,7 @@ public class PrincipalController {
         principalTemplate.getpBotones()
                 .add(botonesPanelController.getBotonesPanelTemplate(), gbc);
 
+        principalTemplate.setEstado(true);
         principalTemplate.repaint();
     }
 
@@ -119,11 +124,11 @@ public class PrincipalController {
         return gbc;
     }
 
-    public String getComando() {
+    public CatalogoEnum getComando() {
         return comando;
     }
 
-    public void setComando(String comando) {
+    public void setComando(CatalogoEnum comando) {
         this.comando = comando;
         crearObjetos();
         mostrarContenido();

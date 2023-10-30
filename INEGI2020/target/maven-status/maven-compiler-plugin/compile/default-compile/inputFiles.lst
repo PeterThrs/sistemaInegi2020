@@ -2,6 +2,7 @@ E:\PeterCursos\ProyectosControladosGit\sistemaInegi2020\INEGI2020\src\main\java\
 E:\PeterCursos\ProyectosControladosGit\sistemaInegi2020\INEGI2020\src\main\java\com\thrs\pruebaEntidades.java
 E:\PeterCursos\ProyectosControladosGit\sistemaInegi2020\INEGI2020\src\main\java\com\thrs\repository\EntidadDao.java
 E:\PeterCursos\ProyectosControladosGit\sistemaInegi2020\INEGI2020\src\main\java\com\thrs\repository\LocalidadDao.java
+E:\PeterCursos\ProyectosControladosGit\sistemaInegi2020\INEGI2020\src\main\java\com\thrs\models\CatalogoEnum.java
 E:\PeterCursos\ProyectosControladosGit\sistemaInegi2020\INEGI2020\src\main\java\com\thrs\pruebaLocalidades.java
 E:\PeterCursos\ProyectosControladosGit\sistemaInegi2020\INEGI2020\src\main\java\com\thrs\vistas\panel\TituloPanelTemplate.java
 E:\PeterCursos\ProyectosControladosGit\sistemaInegi2020\INEGI2020\src\main\java\com\thrs\repository\MunicipioDao.java
@@ -10,6 +11,7 @@ E:\PeterCursos\ProyectosControladosGit\sistemaInegi2020\INEGI2020\src\main\java\
 E:\PeterCursos\ProyectosControladosGit\sistemaInegi2020\INEGI2020\src\main\java\com\thrs\services\logicServices\AccionService.java
 E:\PeterCursos\ProyectosControladosGit\sistemaInegi2020\INEGI2020\src\main\java\com\thrs\services\graphicServices\GraficosAvanzadosService.java
 E:\PeterCursos\ProyectosControladosGit\sistemaInegi2020\INEGI2020\src\main\java\com\thrs\services\graphicServices\ObjGraficosService.java
+E:\PeterCursos\ProyectosControladosGit\sistemaInegi2020\INEGI2020\src\main\java\com\thrs\ModeloTablaEntidades.java
 E:\PeterCursos\ProyectosControladosGit\sistemaInegi2020\INEGI2020\src\main\java\com\thrs\models\Municipio.java
 E:\PeterCursos\ProyectosControladosGit\sistemaInegi2020\INEGI2020\src\main\java\com\thrs\controllers\main\Main.java
 E:\PeterCursos\ProyectosControladosGit\sistemaInegi2020\INEGI2020\src\main\java\com\thrs\vistas\MenuTemplate.java
@@ -26,8 +28,10 @@ E:\PeterCursos\ProyectosControladosGit\sistemaInegi2020\INEGI2020\src\main\java\
 E:\PeterCursos\ProyectosControladosGit\sistemaInegi2020\INEGI2020\src\main\java\com\thrs\vistas\panel\BotonesPanelTemplate.java
 E:\PeterCursos\ProyectosControladosGit\sistemaInegi2020\INEGI2020\src\main\java\com\thrs\Mensaje.java
 E:\PeterCursos\ProyectosControladosGit\sistemaInegi2020\INEGI2020\src\main\java\com\thrs\models\Entidad.java
+E:\PeterCursos\ProyectosControladosGit\sistemaInegi2020\INEGI2020\src\main\java\com\thrs\TableModels\ModelEntidad.java
 E:\PeterCursos\ProyectosControladosGit\sistemaInegi2020\INEGI2020\src\main\java\com\thrs\controllers\TituloPanelController.java
 E:\PeterCursos\ProyectosControladosGit\sistemaInegi2020\INEGI2020\src\main\java\com\thrs\controllers\formularios\FormularioEntidadesPanelController.java
+E:\PeterCursos\ProyectosControladosGit\sistemaInegi2020\INEGI2020\src\main\java\com\thrs\ModeloTablaPrueba.java
 E:\PeterCursos\ProyectosControladosGit\sistemaInegi2020\INEGI2020\src\main\java\com\thrs\models\Localidad.java
 E:\PeterCursos\ProyectosControladosGit\sistemaInegi2020\INEGI2020\src\main\java\com\thrs\controllers\BotonesPanelController.java
 E:\PeterCursos\ProyectosControladosGit\sistemaInegi2020\INEGI2020\src\main\java\com\thrs\services\graphicServices\RecursosService.java
@@ -35,6 +39,7 @@ E:\PeterCursos\ProyectosControladosGit\sistemaInegi2020\INEGI2020\src\main\java\
 E:\PeterCursos\ProyectosControladosGit\sistemaInegi2020\INEGI2020\src\main\java\com\thrs\pruebaMunicipios.java
 E:\PeterCursos\ProyectosControladosGit\sistemaInegi2020\INEGI2020\src\main\java\com\thrs\services\logicServices\UsuarioService.java
 E:\PeterCursos\ProyectosControladosGit\sistemaInegi2020\INEGI2020\src\main\java\com\thrs\vistas\panel\formularios\FormularioEntidadesPanelTemplate.java
+E:\PeterCursos\ProyectosControladosGit\sistemaInegi2020\INEGI2020\src\main\java\com\thrs\ModeloTablaAbstract.java
 E:\PeterCursos\ProyectosControladosGit\sistemaInegi2020\INEGI2020\src\main\java\com\thrs\pruebaPoblacionEdad.java
 E:\PeterCursos\ProyectosControladosGit\sistemaInegi2020\INEGI2020\src\main\java\com\thrs\repository\Censo2020Dao.java
 E:\PeterCursos\ProyectosControladosGit\sistemaInegi2020\INEGI2020\src\main\java\com\thrs\vistas\panel\tabla\TablaEntidadesPanelTemplate.java
