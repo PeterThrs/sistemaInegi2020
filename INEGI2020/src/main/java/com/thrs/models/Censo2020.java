@@ -79,6 +79,50 @@ public class Censo2020 {
     }
 
     @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 79 * hash + this.idEntidad;
+        hash = 79 * hash + this.idMunicipio;
+        hash = 79 * hash + this.idLocalidad;
+        hash = 79 * hash + this.pobTotal;
+        hash = 79 * hash + this.pobFemenina;
+        hash = 79 * hash + this.pobMasculina;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Censo2020 other = (Censo2020) obj;
+        if (this.idEntidad != other.idEntidad) {
+            return false;
+        }
+        if (this.idMunicipio != other.idMunicipio) {
+            return false;
+        }
+        if (this.idLocalidad != other.idLocalidad) {
+            return false;
+        }
+        if (this.pobTotal != other.pobTotal) {
+            return false;
+        }
+        if (this.pobFemenina != other.pobFemenina) {
+            return false;
+        }
+        return this.pobMasculina == other.pobMasculina;
+    }
+
+    
+
+    @Override
     public String toString() {
         return "Censo2020{" + "idEntidad=" + idEntidad + ", idMunicpio=" + idMunicipio + ", idLocalidad=" + idLocalidad + ", pobTotal=" + pobTotal + ", pobFemenina=" + pobFemenina + ", pobMasculina=" + pobMasculina + '}';
     }

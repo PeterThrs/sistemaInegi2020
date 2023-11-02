@@ -4,6 +4,8 @@
  */
 package com.thrs.models;
 
+import java.util.Objects;
+
 /**
  *
  * @author Usuario
@@ -55,6 +57,43 @@ public class Localidad {
     public void setNomLocalidad(String nomLocalidad) {
         this.nomLocalidad = nomLocalidad;
     }
+
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 41 * hash + this.idEntidad;
+        hash = 41 * hash + this.idMunicipio;
+        hash = 41 * hash + this.idLocalidad;
+        hash = 41 * hash + Objects.hashCode(this.nomLocalidad);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Localidad other = (Localidad) obj;
+        if (this.idEntidad != other.idEntidad) {
+            return false;
+        }
+        if (this.idMunicipio != other.idMunicipio) {
+            return false;
+        }
+        if (this.idLocalidad != other.idLocalidad) {
+            return false;
+        }
+        return Objects.equals(this.nomLocalidad, other.nomLocalidad);
+    }
+    
+    
+    
 
     @Override
     public String toString() {

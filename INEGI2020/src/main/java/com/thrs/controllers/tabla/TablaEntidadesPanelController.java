@@ -18,7 +18,6 @@ import java.awt.event.MouseListener;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
-import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -120,8 +119,7 @@ public class TablaEntidadesPanelController implements ActionListener, MouseListe
             int filaSeleccionada = filaSeleccionada();
 
             entidad = new Entidad();
-            ModelEntidad modelo = principalController.getTablaEntidadesPanelController()
-                    .getTablaEntidadesPanelTemplate().getModelo();
+            ModelEntidad modelo = tablaEntidadesPanelTemplate.getModelo();
 
             int idEntidad = (Integer) modelo.getValueAt(filaSeleccionada, 0);
             String nomEntidad = (String) modelo.getValueAt(filaSeleccionada, 1);
@@ -135,13 +133,13 @@ public class TablaEntidadesPanelController implements ActionListener, MouseListe
         
         //retroceder
         if (e.getSource() == tablaEntidadesPanelTemplate.getBtnAnterior()) {
-            principalController.getTablaEntidadesPanelController().getTablaEntidadesPanelTemplate().getModelo().previousPage();
+            tablaEntidadesPanelTemplate.getModelo().previousPage();
             tablaEntidadesPanelTemplate.getBtnSiguiente().setEnabled(true); // Al retroceder, habilita el botón de "Siguiente"
         }
 
         //actualizar un elemento
         if (e.getSource() == tablaEntidadesPanelTemplate.getBtnSiguiente()) {
-            ModelEntidad model = principalController.getTablaEntidadesPanelController().getTablaEntidadesPanelTemplate().getModelo();
+            ModelEntidad model = tablaEntidadesPanelTemplate.getModelo();
             model.nextPage();
             if ((model.getCurrentPage() + 1) * model.getPAGE_SIZE() >= entidades.size()) {
                 tablaEntidadesPanelTemplate.getBtnSiguiente().setEnabled(false); // Si estás en la última página, deshabilita el botón "Siguiente"
