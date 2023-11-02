@@ -43,7 +43,6 @@ public class PoblacionEdad {
     private int p60YMasF;
     private int p60YMasM;
     
-    
     public PoblacionEdad(){}
 
     public PoblacionEdad(int idEntidad, int idMunicpio, int idLolicadad) {
@@ -326,6 +325,146 @@ public class PoblacionEdad {
     public void setP60YMasM(int p60YMasM) {
         this.p60YMasM = p60YMasM;
     }
+
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 43 * hash + this.idEntidad;
+        hash = 43 * hash + this.idMunicipio;
+        hash = 43 * hash + this.idLocalidad;
+        hash = 43 * hash + this.p0A2F;
+        hash = 43 * hash + this.p0A2M;
+        hash = 43 * hash + this.p3YMasF;
+        hash = 43 * hash + this.p3YMasM;
+        hash = 43 * hash + this.p5YMasF;
+        hash = 43 * hash + this.p5YMasM;
+        hash = 43 * hash + this.p12YMasF;
+        hash = 43 * hash + this.p12YMasM;
+        hash = 43 * hash + this.p15YMasF;
+        hash = 43 * hash + this.p15YMasM;
+        hash = 43 * hash + this.p18YMasF;
+        hash = 43 * hash + this.p18YMasM;
+        hash = 43 * hash + this.p3A5F;
+        hash = 43 * hash + this.p3A5M;
+        hash = 43 * hash + this.p6A11F;
+        hash = 43 * hash + this.p6A11M;
+        hash = 43 * hash + this.p8A14F;
+        hash = 43 * hash + this.p8A14M;
+        hash = 43 * hash + this.p12A14F;
+        hash = 43 * hash + this.p12A14M;
+        hash = 43 * hash + this.p15A17F;
+        hash = 43 * hash + this.p15A17M;
+        hash = 43 * hash + this.p18A24F;
+        hash = 43 * hash + this.p18A24M;
+        hash = 43 * hash + this.p15A49F;
+        hash = 43 * hash + this.p60YMasF;
+        hash = 43 * hash + this.p60YMasM;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final PoblacionEdad other = (PoblacionEdad) obj;
+        if (this.idEntidad != other.idEntidad) {
+            return false;
+        }
+        if (this.idMunicipio != other.idMunicipio) {
+            return false;
+        }
+        if (this.idLocalidad != other.idLocalidad) {
+            return false;
+        }
+        if (this.p0A2F != other.p0A2F) {
+            return false;
+        }
+        if (this.p0A2M != other.p0A2M) {
+            return false;
+        }
+        if (this.p3YMasF != other.p3YMasF) {
+            return false;
+        }
+        if (this.p3YMasM != other.p3YMasM) {
+            return false;
+        }
+        if (this.p5YMasF != other.p5YMasF) {
+            return false;
+        }
+        if (this.p5YMasM != other.p5YMasM) {
+            return false;
+        }
+        if (this.p12YMasF != other.p12YMasF) {
+            return false;
+        }
+        if (this.p12YMasM != other.p12YMasM) {
+            return false;
+        }
+        if (this.p15YMasF != other.p15YMasF) {
+            return false;
+        }
+        if (this.p15YMasM != other.p15YMasM) {
+            return false;
+        }
+        if (this.p18YMasF != other.p18YMasF) {
+            return false;
+        }
+        if (this.p18YMasM != other.p18YMasM) {
+            return false;
+        }
+        if (this.p3A5F != other.p3A5F) {
+            return false;
+        }
+        if (this.p3A5M != other.p3A5M) {
+            return false;
+        }
+        if (this.p6A11F != other.p6A11F) {
+            return false;
+        }
+        if (this.p6A11M != other.p6A11M) {
+            return false;
+        }
+        if (this.p8A14F != other.p8A14F) {
+            return false;
+        }
+        if (this.p8A14M != other.p8A14M) {
+            return false;
+        }
+        if (this.p12A14F != other.p12A14F) {
+            return false;
+        }
+        if (this.p12A14M != other.p12A14M) {
+            return false;
+        }
+        if (this.p15A17F != other.p15A17F) {
+            return false;
+        }
+        if (this.p15A17M != other.p15A17M) {
+            return false;
+        }
+        if (this.p18A24F != other.p18A24F) {
+            return false;
+        }
+        if (this.p18A24M != other.p18A24M) {
+            return false;
+        }
+        if (this.p15A49F != other.p15A49F) {
+            return false;
+        }
+        if (this.p60YMasF != other.p60YMasF) {
+            return false;
+        }
+        return this.p60YMasM == other.p60YMasM;
+    }
+
+    
     
     
 

@@ -58,14 +58,14 @@ public class FormularioEntidadesPanelTemplate extends JPanel {
     public void crearContenidoPDatos() {
         // LABEL INSTRUCCIONES ----------------------------------------------------------------
         lInstrucciones = sObjGraficos.construirJLabel(
-                "<html>Datos de las Entidades<html>",
+                "Datos de la Entidad",
                 20, 10, 120, 50,
                 null, null,
                 sRecursos.getFontTitulo(),
                 null,
                 sRecursos.getColorGrisOscuro(),
                 null,
-                "l"
+                "c"
         );
         //gbc = grid(0, 0, 2, 1, 0, 0, GridBagConstraints.BOTH, GridBagConstraints.CENTER, new Insets(10, 10, 10, 10), 0, 0);
         gbc = sObjGraficos.getGridBagConstraints(0, 0, 3, 1, 0, 0, GridBagConstraints.NONE, GridBagConstraints.CENTER, new Insets(10, 10, 10, 10), 0, 0);
@@ -73,14 +73,14 @@ public class FormularioEntidadesPanelTemplate extends JPanel {
 
         // LABEL ESLOGAN ----------------------------------------------------------------
         lEslogan = sObjGraficos.construirJLabel(
-                "<html>A continuación puede ver y editar<br> la información de las Entidades<html>",
+                "Administración de datos",
                 20, 50, 180, 90,
                 null, null,
                 sRecursos.getFontLigera(),
                 null,
                 sRecursos.getColorGrisOscuro(),
                 null,
-                "l"
+                "c"
         );
         //gbc = grid(0, 1, 2, 1, 0, 0, GridBagConstraints.BOTH, GridBagConstraints.CENTER, new Insets(10, 10, 10, 10), 0, 0);
         gbc = sObjGraficos.getGridBagConstraints(0, 1, 3, 1, 0, 0, GridBagConstraints.BOTH, GridBagConstraints.CENTER, new Insets(10, 10, 10, 10), 0, 0);
