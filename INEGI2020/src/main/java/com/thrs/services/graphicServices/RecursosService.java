@@ -22,7 +22,7 @@ public class RecursosService {
     private GraficosAvanzadosService sGraficosAvanzados;
     private Color colorPrincipal, colorPrincipalOscuro, colorPrincipalClaro, colorSecundario, colorPrincipalMenu, colorSecundarioMenu, colorSecundarioMenuObscuro;
     private Color colorAzulMarino, colorGrisOscuro, colorGrisClaro, colorTransparente;
-    private Font fontTPrincipal, fontTitulo, fontSubtitulo, fontPrincipalMenu, fontCatalogo;
+    private Font fontTPrincipal, fontTitulo, fontSubtitulo, fontPrincipalMenu, fontCatalogo, fontConcertOne;
     private Font fontMediana, fontLigera, fontTProducto;
     private Cursor cMano;
     private Border bInferiorAzul, bInferiorGris, bLateralAzul, bGris, bAzul;
@@ -54,7 +54,7 @@ public class RecursosService {
         colorTransparente = new Color(0, 0, 0, 0);
         this.colorPrincipalMenu = new Color(39, 54, 77);
         this.colorSecundarioMenu = new Color(240, 235, 216);
-        this.colorSecundarioMenuObscuro = new Color(150, 170, 190);
+        this.colorSecundarioMenuObscuro = new Color(193, 181, 137);
     }
 
     private void crearFuentes() {
@@ -66,6 +66,7 @@ public class RecursosService {
         fontSubtitulo = new Font("Forte", Font.PLAIN, 18);
         fontMediana = new Font("LuzSans-Book", Font.PLAIN, 20);
         fontLigera = new Font("LuzSans-Book", Font.PLAIN, 17);
+        fontConcertOne = new Font("Roboto", Font.BOLD, 35);
     }
 
     private void crearCursores() {
@@ -166,6 +167,10 @@ public class RecursosService {
 
     public Font getFontCatalogo() {
         return fontCatalogo;
+    }
+
+    public Font getFontConcertOne() {
+        return fontConcertOne;
     }
 
     public Cursor getCMano() {

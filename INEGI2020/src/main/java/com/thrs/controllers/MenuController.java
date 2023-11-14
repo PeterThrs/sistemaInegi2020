@@ -73,7 +73,7 @@ public class MenuController implements ActionListener, MouseListener, FocusListe
         } else {
             this.principalController.setComando(comando);
             this.principalController.getPrincipalTemplate().setVisible(true);
-            
+
         }
 
         menuTemplate.setVisible(false);
@@ -101,6 +101,7 @@ public class MenuController implements ActionListener, MouseListener, FocusListe
 
     @Override
     public void focusLost(FocusEvent e) {
+
     }
 
 }
