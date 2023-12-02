@@ -7,6 +7,7 @@ package com.thrs.controllers.tabla;
 import com.thrs.TableModels.ModelEntidad;
 import com.thrs.controllers.PrincipalController;
 import com.thrs.models.Entidad;
+import com.thrs.repository.EntidadDao;
 import com.thrs.services.EntidadService;
 import com.thrs.vistas.panel.tabla.TablaEntidadesPanelTemplate;
 import java.awt.event.ActionEvent;
@@ -27,14 +28,14 @@ public class TablaEntidadesPanelController implements ActionListener, MouseListe
 
     private PrincipalController principalController;
     private TablaEntidadesPanelTemplate tablaEntidadesPanelTemplate;
-    private EntidadService sEntidad;
+    private EntidadDao entidadDao;
     private List<Entidad> entidades;
     private Entidad entidad;
 
     public TablaEntidadesPanelController(PrincipalController principalController) {
         this.principalController = principalController;
         this.tablaEntidadesPanelTemplate = new TablaEntidadesPanelTemplate(this);
-        this.sEntidad = sEntidad.getService();
+        this.entidadDao = new EntidadDao();
 
         mostrarRegistrosTabla();
 
@@ -42,7 +43,7 @@ public class TablaEntidadesPanelController implements ActionListener, MouseListe
 
     public void mostrarRegistrosTabla() {
         this.tablaEntidadesPanelTemplate.getModelo().limpiarDatos();
-        entidades = sEntidad.getEntidades();
+        entidades = entidadDao.selectAll();
         
         this.tablaEntidadesPanelTemplate.getModelo().agregarData(entidades);
 //        entidades.forEach(ent -> {
@@ -73,20 +74,6 @@ public class TablaEntidadesPanelController implements ActionListener, MouseListe
                     JOptionPane.ERROR_MESSAGE
             );
         }
-    }
-
-    public void eliminarRegistroTabla() {
-//        int fSeleccionada = tablaEntidadesPanelTemplate.getTabla().getSelectedRow();
-//        if (fSeleccionada != -1) {
-//            tablaEntidadesPanelTemplate.getModelo().removeRow(fSeleccionada);
-//        } else {
-//            JOptionPane.showMessageDialog(
-//                    null,
-//                    "seleccione una fila",
-//                    "Error",
-//                    JOptionPane.ERROR_MESSAGE
-//            );
-//        }
     }
     
     public void deseleccionarElemento(){

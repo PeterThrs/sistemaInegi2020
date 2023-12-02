@@ -13,7 +13,9 @@ public enum CatalogoEnum {
     MUNICIPIO("Municipios"),
     LOCALIDAD("Localidades"),
     CENSO_2020("Censo 2020"),
-    POBLACION_EDAD("Poblacion Edad");
+    POBLACION_EDAD("Poblacion Edad"),
+    POBLACION_ESTADO("Poblacion Por Entidad"),
+    TRANSACCION("Transacciones");
     
     private final String valor;
     

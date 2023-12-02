@@ -35,7 +35,6 @@ public class PoblacionEdadDao {
 
     private static final String SQL_DELETE = "DELETE FROM poblacion_edad WHERE identidad = ? AND idmunicipio = ? AND idlocalidad = ?";
     private static final String SQL_SELECT_WHERE = "SELECT * FROM poblacion_edad WHERE identidad = ? AND idmunicipio = ? AND idlocalidad = ?";
-    //private static final String SQL_SELECT_LAST = "SELECT * FROM municipios ORDER BY identidad DESC LIMIT 1;";
 
     public static List<PoblacionEdad> selectAll() {
         Connection coon = null;

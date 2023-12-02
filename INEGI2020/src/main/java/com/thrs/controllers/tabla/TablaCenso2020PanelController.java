@@ -7,6 +7,7 @@ package com.thrs.controllers.tabla;
 import com.thrs.TableModels.ModelCenso2020;
 import com.thrs.controllers.PrincipalController;
 import com.thrs.models.Censo2020;
+import com.thrs.repository.Censo2020Dao;
 import com.thrs.services.Censo2020Service;
 import com.thrs.vistas.panel.tabla.TablaCenso2020PanelTemplate;
 import java.awt.event.ActionEvent;
@@ -26,7 +27,7 @@ public class TablaCenso2020PanelController implements ActionListener, MouseListe
 
     private PrincipalController principalController;
     private TablaCenso2020PanelTemplate tablaCenso2020PanelTemplate;
-    private Censo2020Service sCenso2020;
+    private Censo2020Dao censo2020Dao;
     private List<Censo2020> listaCenso;
     private Censo2020 censo2020;
     private ModelCenso2020 modelo;
@@ -34,7 +35,7 @@ public class TablaCenso2020PanelController implements ActionListener, MouseListe
     public TablaCenso2020PanelController(PrincipalController principalController) {
         this.principalController = principalController;
         this.tablaCenso2020PanelTemplate = new TablaCenso2020PanelTemplate(this);
-        this.sCenso2020 = sCenso2020.getService();
+        this.censo2020Dao = new Censo2020Dao();
 
         mostrarRegistrosTabla();
 
@@ -42,7 +43,7 @@ public class TablaCenso2020PanelController implements ActionListener, MouseListe
 
     public void mostrarRegistrosTabla() {
         this.tablaCenso2020PanelTemplate.getModelo().limpiarDatos();
-        listaCenso = sCenso2020.getListaCenso();
+        listaCenso = censo2020Dao.selectAll();
         
         this.tablaCenso2020PanelTemplate.getModelo().agregarData(listaCenso);
 //        entidades.forEach(ent -> {

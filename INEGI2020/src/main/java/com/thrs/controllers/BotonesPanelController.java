@@ -12,6 +12,11 @@ import com.thrs.models.Entidad;
 import com.thrs.models.Localidad;
 import com.thrs.models.Municipio;
 import com.thrs.models.PoblacionEdad;
+import com.thrs.repository.Censo2020Dao;
+import com.thrs.repository.EntidadDao;
+import com.thrs.repository.LocalidadDao;
+import com.thrs.repository.MunicipioDao;
+import com.thrs.repository.PoblacionEdadDao;
 import com.thrs.services.Censo2020Service;
 import com.thrs.services.EntidadService;
 import com.thrs.services.LocalidadService;
@@ -46,11 +51,11 @@ public class BotonesPanelController implements ActionListener, MouseListener, Fo
 
     private CatalogoEnum comando;
 
-    private EntidadService sEntidad;
-    private MunicipioService sMunicipio;
-    private LocalidadService sLocalidad;
-    private Censo2020Service sCenso2020;
-    private PoblacionEdadService sPoblacionEdad;
+    private EntidadDao entidadDao;
+    private MunicipioDao municipioDao;
+    private LocalidadDao LocalidadDao;
+    private Censo2020Dao censo2020Dao;
+    private PoblacionEdadDao poblacionEdadDao;
 
     private List<Entidad> entidades;
     private List<Municipio> municipios;
@@ -63,11 +68,11 @@ public class BotonesPanelController implements ActionListener, MouseListener, Fo
         this.comando = comando;
         this.botonesPanelTemplate = new BotonesPanelTemplate(this, this.comando.getValor());
 
-        this.sEntidad = sEntidad.getService();
-        this.sMunicipio = sMunicipio.getService();
-        this.sLocalidad = sLocalidad.getService();
-        this.sCenso2020 = sCenso2020.getService();
-        this.sPoblacionEdad = sPoblacionEdad.getService();
+        this.entidadDao = new EntidadDao();
+        this.municipioDao = new MunicipioDao();
+        this.LocalidadDao = new LocalidadDao();
+        this.censo2020Dao = new Censo2020Dao();
+        this.poblacionEdadDao = new PoblacionEdadDao();
     }
 
     private int filaSeleccionada() {
@@ -90,23 +95,23 @@ public class BotonesPanelController implements ActionListener, MouseListener, Fo
 
         switch (this.comando) {
             case ENTIDAD:
-                this.entidades = sEntidad.getEntidades();
+                this.entidades = entidadDao.selectAll();
                 break;
             case MUNICIPIO:
-                this.entidades = sEntidad.getEntidades();
-                this.municipios = sMunicipio.getMunicipios();
+                this.entidades = entidadDao.selectAll();
+                this.municipios = municipioDao.selectAll();
                 break;
             case LOCALIDAD:
-                this.municipios = sMunicipio.getMunicipios();
-                this.localidades = sLocalidad.getLocalidades();
+                this.municipios = municipioDao.selectAll();
+                this.localidades = LocalidadDao.selectAll();
                 break;
             case CENSO_2020:
-                this.localidades = sLocalidad.getLocalidades();
-                this.listaCenso = sCenso2020.getListaCenso();
+                this.localidades = LocalidadDao.selectAll();
+                this.listaCenso = censo2020Dao.selectAll();
                 break;
             case POBLACION_EDAD:
-                this.localidades = sLocalidad.getLocalidades();
-                this.listaPoblacion = sPoblacionEdad.getListaPoblacion();
+                this.localidades = LocalidadDao.selectAll();
+                this.listaPoblacion = poblacionEdadDao.selectAll();
                 break;
         }
     }
@@ -163,7 +168,7 @@ public class BotonesPanelController implements ActionListener, MouseListener, Fo
                         mensajeError("Ya existe el ID de entidad");
                         return;
                     }
-                    this.sEntidad.agregarEntidad(entidadRecuperada);
+                    this.entidadDao.insert(entidadRecuperada);
                     this.principalController.getTablaEntidadesPanelController().mostrarRegistrosTabla();
                     this.principalController.getFormularioEntidadesPanelController().restaurarValores();
                     mensajeInformativo("Entidad Insertada correctamente");
@@ -182,7 +187,7 @@ public class BotonesPanelController implements ActionListener, MouseListener, Fo
                         return;
                     }
 
-                    this.sMunicipio.agregarMunicipio(municipioRecuperado);
+                    this.municipioDao.insert(municipioRecuperado);
                     this.principalController.getTablaMunicipiosPanelController().mostrarRegistrosTabla();
                     this.principalController.getFormularioMunicipiosPanelController().restaurarValores();
                     mensajeInformativo("Municipio insertado correctamente");
@@ -202,7 +207,7 @@ public class BotonesPanelController implements ActionListener, MouseListener, Fo
                         return;
                     }
 
-                    this.sLocalidad.agregarLocalidad(localidadRecuperada);
+                    this.LocalidadDao.insert(localidadRecuperada);
                     this.principalController.getTablaLocalidadesPanelController().mostrarRegistrosTabla();
                     this.principalController.getFormularioLocalidadesPanelController().restaurarValores();
                     mensajeInformativo("Localidad insertada correctamente");
@@ -223,7 +228,7 @@ public class BotonesPanelController implements ActionListener, MouseListener, Fo
                         return;
                     }
 
-                    this.sCenso2020.agregarCenso(censoRecuperado);
+                    this.censo2020Dao.insert(censoRecuperado);
                     this.principalController.getTablaCenso2020PanelController().mostrarRegistrosTabla();
                     this.principalController.getFormularioCenso2020PanelController().restaurarValores();
                     mensajeInformativo("Censo2020 insertado correctamente");
@@ -245,7 +250,7 @@ public class BotonesPanelController implements ActionListener, MouseListener, Fo
                         return;
                     }
 
-                    this.sPoblacionEdad.agregarPoblacion(pobRecuperada);
+                    this.poblacionEdadDao.insert(pobRecuperada);
                     this.principalController.getTablaPoblacionEdadPanelController().mostrarRegistrosTabla();
                     this.principalController.getFormularioPoblacionEdadPanelController().restaurarValores();
                     mensajeInformativo("Registro de poblacion insertado correctamente");
@@ -276,7 +281,7 @@ public class BotonesPanelController implements ActionListener, MouseListener, Fo
                         mensajeError("Ya existe el ID de entidad al que quiere actualizar");
                         return;
                     }
-                    sEntidad.actualizarEntidad(entidadRecuperada, entidadAnterior);
+                    entidadDao.update(entidadRecuperada, entidadAnterior);
                     this.principalController.getTablaEntidadesPanelController().mostrarRegistrosTabla();
                     this.principalController.getFormularioEntidadesPanelController().restaurarValores();
                     mensajeInformativo("Entidad modificada correctamente");
@@ -306,7 +311,7 @@ public class BotonesPanelController implements ActionListener, MouseListener, Fo
                         return;
                     }
 
-                    this.sMunicipio.actualizarMunicipio(municipioRecuperado, municipioAnterior);
+                    this.municipioDao.update(municipioRecuperado, municipioAnterior);
                     this.principalController.getTablaMunicipiosPanelController().mostrarRegistrosTabla();
                     this.principalController.getFormularioMunicipiosPanelController().restaurarValores();
                     mensajeInformativo("Municipio modificado correctamente");
@@ -335,7 +340,7 @@ public class BotonesPanelController implements ActionListener, MouseListener, Fo
                         return;
                     }
 
-                    this.sLocalidad.actualizarLocalidad(localidadRecuperada, localidadAnterior);
+                    this.LocalidadDao.update(localidadRecuperada, localidadAnterior);
                     this.principalController.getTablaLocalidadesPanelController().mostrarRegistrosTabla();
                     this.principalController.getFormularioLocalidadesPanelController().restaurarValores();
                     mensajeInformativo("Localidad actualizada correctamente");
@@ -364,7 +369,7 @@ public class BotonesPanelController implements ActionListener, MouseListener, Fo
                         return;
                     }
                     
-                    this.sCenso2020.actualizarCenso(censoRecuperado, censoAnterior);
+                    this.censo2020Dao.update(censoRecuperado, censoAnterior);
                     this.principalController.getTablaCenso2020PanelController().mostrarRegistrosTabla();
                     this.principalController.getFormularioCenso2020PanelController().restaurarValores();
                     mensajeInformativo("Censo2020 actualizado correctamente");
@@ -393,7 +398,7 @@ public class BotonesPanelController implements ActionListener, MouseListener, Fo
                         return;
                     }
                     
-                    this.sPoblacionEdad.actualizarPoblacion(pobRecuperada, pobAnterior);
+                    this.poblacionEdadDao.update(pobRecuperada, pobAnterior);
                     this.principalController.getTablaPoblacionEdadPanelController().mostrarRegistrosTabla();
                     this.principalController.getFormularioPoblacionEdadPanelController().restaurarValores();
                     mensajeInformativo("Registro de poblacion actualizado correctamente");
@@ -418,7 +423,7 @@ public class BotonesPanelController implements ActionListener, MouseListener, Fo
                         mensajeError("No debe modificar el registro");
                         return;
                     }
-                    sEntidad.eliminarEntidad(entidadRecuperada);
+                    entidadDao.delete(entidadRecuperada);
                     this.principalController.getTablaEntidadesPanelController().mostrarRegistrosTabla();
                     this.principalController.getFormularioEntidadesPanelController().restaurarValores();
                     mensajeInformativo("Entidad Elimina correctamente");
@@ -432,7 +437,7 @@ public class BotonesPanelController implements ActionListener, MouseListener, Fo
                         mensajeError("No debe modificar el campo");
                         return;
                     }
-                    sMunicipio.eliminarMunicipio(municipioRecuperado);
+                    municipioDao.delete(municipioRecuperado);
                     this.principalController.getTablaMunicipiosPanelController().mostrarRegistrosTabla();
                     this.principalController.getFormularioMunicipiosPanelController().restaurarValores();
                     mensajeInformativo("Municipio eliminado correctamente");
@@ -446,7 +451,7 @@ public class BotonesPanelController implements ActionListener, MouseListener, Fo
                         mensajeError("No debe modificar el campo");
                         return;
                     }
-                    sLocalidad.eliminarLocalidad(localidadRecuperada);
+                    LocalidadDao.delete(localidadRecuperada);
                     this.principalController.getTablaLocalidadesPanelController().mostrarRegistrosTabla();
                     this.principalController.getFormularioLocalidadesPanelController().restaurarValores();
                     mensajeInformativo("Localidad eliminada correctamente");
@@ -462,7 +467,7 @@ public class BotonesPanelController implements ActionListener, MouseListener, Fo
                         return;
                     }
 
-                    this.sCenso2020.eliminarCenso(censoRecuperado);
+                    this.censo2020Dao.delete(censoRecuperado);
                     this.principalController.getTablaCenso2020PanelController().mostrarRegistrosTabla();
                     this.principalController.getFormularioCenso2020PanelController().restaurarValores();
                     mensajeInformativo("Censo2020 eliminado correctamente");
@@ -477,7 +482,7 @@ public class BotonesPanelController implements ActionListener, MouseListener, Fo
                         return;
                     }
 
-                    this.sPoblacionEdad.eliminarPoblacion(pobRecuperada);
+                    this.poblacionEdadDao.delete(pobRecuperada);
                     this.principalController.getTablaPoblacionEdadPanelController().mostrarRegistrosTabla();
                     this.principalController.getFormularioPoblacionEdadPanelController().restaurarValores();
                     mensajeInformativo("Registro de poblacion eliminado correctamente");

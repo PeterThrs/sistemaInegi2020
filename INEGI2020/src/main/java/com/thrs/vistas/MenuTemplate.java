@@ -30,7 +30,8 @@ public class MenuTemplate extends JFrame {
     private JPanel pDerecho, pIzquierdo, pDerCentrado, pTitulo;
     private GridBagConstraints gbc;
     private ImageIcon imagen;
-    private JButton btnEntidad, btnMunicipio, btnLocalidad, btnCenso, btnPoblacion, btnSalir;
+    private JButton btnEntidad, btnMunicipio, btnLocalidad, btnCenso, btnPoblacion, btnSalir,
+                    btnPobEstado, btnTransaccion;
     private Color colorPrincipal, colorSecundario;
     private JLabel lCatalogo, l1, l2, l3, l4, l5, l6, l7, l8, l9;
 
@@ -270,7 +271,7 @@ public class MenuTemplate extends JFrame {
         btnEntidad.addActionListener(menuController);
 
         this.repaint();
-        gbc = sObjGraficos.getGridBagConstraints(0, 0, 1, 1, 1, 1, GridBagConstraints.BOTH, GridBagConstraints.CENTER, new Insets(10, 10, 10, 10), 0, 0);
+        gbc = sObjGraficos.getGridBagConstraints(0, 0, 1, 1, 1, 1, GridBagConstraints.BOTH, GridBagConstraints.CENTER, new Insets(0, 0, 0, 0), 0, 0);
         pDerCentrado.add(btnEntidad, gbc);
 
         //Btn Municipios
@@ -346,9 +347,46 @@ public class MenuTemplate extends JFrame {
         btnPoblacion.addMouseListener(menuController);
         btnPoblacion.addActionListener(menuController);
         this.repaint();
-        this.repaint();
         gbc = sObjGraficos.getGridBagConstraints(0, 4, 1, 1, 1, 1, GridBagConstraints.BOTH, GridBagConstraints.CENTER, new Insets(0, 0, 0, 0), 0, 0);
         pDerCentrado.add(btnPoblacion, gbc);
+        
+        //Btn poblacion por estado
+         btnPobEstado = sObjGraficos.construirJButton(
+                "Poblacion por Estado",
+                430, 65, 120, 35,
+                sRecursos.getCMano(),
+                null,
+                sRecursos.getFontPrincipalMenu(),
+                null,
+                colorPrincipal,
+                null,
+                "c",
+                true
+        );
+        btnPobEstado.addMouseListener(menuController);
+        btnPobEstado.addActionListener(menuController);
+        this.repaint();
+        gbc = sObjGraficos.getGridBagConstraints(0, 5, 1, 1, 1, 1, GridBagConstraints.BOTH, GridBagConstraints.CENTER, new Insets(0, 0, 0, 0), 0, 0);
+        pDerCentrado.add(btnPobEstado, gbc);
+        
+        //Btn para las trasacciones
+         btnTransaccion = sObjGraficos.construirJButton(
+                "Transaccion",
+                430, 65, 120, 35,
+                sRecursos.getCMano(),
+                null,
+                sRecursos.getFontPrincipalMenu(),
+                null,
+                colorPrincipal,
+                null,
+                "c",
+                true
+        );
+        btnTransaccion.addMouseListener(menuController);
+        btnTransaccion.addActionListener(menuController);
+        this.repaint();
+        gbc = sObjGraficos.getGridBagConstraints(0, 6, 1, 1, 1, 1, GridBagConstraints.BOTH, GridBagConstraints.CENTER, new Insets(0, 0, 0, 0), 0, 0);
+        pDerCentrado.add(btnTransaccion, gbc);
         
         //Btn Poblacion Edad
         btnSalir = sObjGraficos.construirJButton(
@@ -366,8 +404,7 @@ public class MenuTemplate extends JFrame {
         btnSalir.addMouseListener(menuController);
         btnSalir.addActionListener(menuController);
         this.repaint();
-        this.repaint();
-        gbc = sObjGraficos.getGridBagConstraints(0, 5, 1, 1, 1, 1, GridBagConstraints.BOTH, GridBagConstraints.CENTER, new Insets(0, 0, 0, 0), 0, 0);
+        gbc = sObjGraficos.getGridBagConstraints(0, 7, 1, 1, 1, 1, GridBagConstraints.BOTH, GridBagConstraints.CENTER, new Insets(0, 0, 0, 0), 0, 0);
         pDerCentrado.add(btnSalir, gbc);
     }
 
@@ -417,6 +454,14 @@ public class MenuTemplate extends JFrame {
 
     public JButton getBtnSalir() {
         return btnSalir;
+    }
+
+    public JButton getBtnPobEstado() {
+        return btnPobEstado;
+    }
+
+    public JButton getBtnTransaccion() {
+        return btnTransaccion;
     }
 
     public JButton getBtnPoblacion() {

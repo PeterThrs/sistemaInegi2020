@@ -8,7 +8,9 @@ import com.thrs.models.Censo2020;
 import com.thrs.models.Entidad;
 import com.thrs.models.Localidad;
 import com.thrs.models.Municipio;
+import com.thrs.models.consultas.Estado;
 import com.thrs.repository.Censo2020Dao;
+import com.thrs.repository.ConsultasBD;
 import com.thrs.repository.EntidadDao;
 import com.thrs.repository.LocalidadDao;
 import com.thrs.repository.MunicipioDao;
@@ -22,17 +24,30 @@ import java.util.List;
 public class pruebaCenso2020 {
 
     public static void main(String[] args) {
+        
+        ConsultasBD consultas = new ConsultasBD();
+        
+//        List<Estado> lista = consultas.obtenerPobEstado();
+//        
+//        System.out.println("\nImprimiendo desde el main \n");
+//        
+//        lista.forEach(e -> System.out.println(e ));
 
-        Censo2020Dao censo2020Dao = new Censo2020Dao();
-        int registros;
-        Censo2020 entidad = new Censo2020(1,1,0, 13, 13, 100);
-        Censo2020 entidadNueva = new Censo2020(1,1,0, 100, 100, 13);
+            Estado estado = consultas.obtenerPobNacional();
+            
+            System.out.println("estado = " + estado);
         
-        //imprimirLista(censo2020Dao);
-        
-        //insertar un municipio
-        registros = censo2020Dao.insert(entidad);
-        System.out.println("Total de entidades insertadas: " + registros);
+
+//        Censo2020Dao censo2020Dao = new Censo2020Dao();
+//        int registros;
+//        Censo2020 entidad = new Censo2020(1,1,0, 13, 13, 100);
+//        Censo2020 entidadNueva = new Censo2020(1,1,0, 100, 100, 13);
+//        
+//        //imprimirLista(censo2020Dao);
+//        
+//        //insertar un municipio
+//        registros = censo2020Dao.insert(entidad);
+//        System.out.println("Total de entidades insertadas: " + registros);
 
         //imprimirLista(localidadDao);
         

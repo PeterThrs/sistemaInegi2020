@@ -57,7 +57,7 @@ public class FormularioPoblacionEdadPanelTemplate extends JPanel {
         this.gbc = new GridBagConstraints();
 
         componentes();
-
+        this.setVisible(true);
     }
 
     private void componentes() {

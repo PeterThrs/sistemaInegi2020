@@ -7,6 +7,7 @@ package com.thrs.controllers.tabla;
 import com.thrs.TableModels.ModelPoblacionEdad;
 import com.thrs.controllers.PrincipalController;
 import com.thrs.models.PoblacionEdad;
+import com.thrs.repository.PoblacionEdadDao;
 import com.thrs.services.PoblacionEdadService;
 import com.thrs.vistas.panel.tabla.TablaPoblacionEdadPanelTemplate;
 import java.awt.event.ActionEvent;
@@ -26,7 +27,7 @@ public class TablaPoblacionEdadPanelController implements ActionListener, MouseL
 
     private PrincipalController principalController;
     private TablaPoblacionEdadPanelTemplate tablaPoblacionEdadPanelTemplate;
-    private PoblacionEdadService sPoblacionEdad;
+    private PoblacionEdadDao poblacionEdadDao;
     private List<PoblacionEdad> localidades;
     private PoblacionEdad poblacionEdad;
     private ModelPoblacionEdad modelo;
@@ -34,7 +35,7 @@ public class TablaPoblacionEdadPanelController implements ActionListener, MouseL
     public TablaPoblacionEdadPanelController(PrincipalController principalController) {
         this.principalController = principalController;
         this.tablaPoblacionEdadPanelTemplate = new TablaPoblacionEdadPanelTemplate(this);
-        this.sPoblacionEdad = sPoblacionEdad.getService();
+        this.poblacionEdadDao = new PoblacionEdadDao();
 
         mostrarRegistrosTabla();
 
@@ -42,7 +43,7 @@ public class TablaPoblacionEdadPanelController implements ActionListener, MouseL
 
     public void mostrarRegistrosTabla() {
         this.tablaPoblacionEdadPanelTemplate.getModelo().limpiarDatos();
-        localidades = sPoblacionEdad.getListaPoblacion();
+        localidades = poblacionEdadDao.selectAll();
 
         this.tablaPoblacionEdadPanelTemplate.getModelo().agregarData(localidades);
 //        entidades.forEach(ent -> {

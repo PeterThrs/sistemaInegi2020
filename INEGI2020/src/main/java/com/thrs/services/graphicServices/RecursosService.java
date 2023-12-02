@@ -28,6 +28,7 @@ public class RecursosService {
     private Border bInferiorAzul, bInferiorGris, bLateralAzul, bGris, bAzul;
     private Border bCircular, bRedondeado, bDifuminado;
     private ImageIcon iCerrar, iMinimizar;
+    private Color c1,c2,c3,c4,c5,c6;
 
     private static RecursosService servicio;
 
@@ -55,12 +56,17 @@ public class RecursosService {
         this.colorPrincipalMenu = new Color(39, 54, 77);
         this.colorSecundarioMenu = new Color(240, 235, 216);
         this.colorSecundarioMenuObscuro = new Color(193, 181, 137);
+        c1 =  new Color(244,244,240);
+        c2 = new Color(64,118,187);
+        c3 = new Color(137,201,129);
+        c4 = new Color(120,0,0);
+        c5 = new Color(131,197,190);
     }
 
     private void crearFuentes() {
         fontCatalogo = new Font("JetBrains Mono",Font.BOLD, 50);
         fontTPrincipal = new Font("Rockwell Extra Bold", Font.PLAIN, 35);
-        fontPrincipalMenu = new Font("LuzSans-Book", Font.BOLD, 40);
+        fontPrincipalMenu = new Font("LuzSans-Book", Font.BOLD, 35);
         fontTProducto = new Font("LuzSans-Book", Font.BOLD, 33);
         fontTitulo = new Font("Calibri (Cuerpo)", Font.BOLD, 22);
         fontSubtitulo = new Font("Forte", Font.PLAIN, 18);
@@ -139,6 +145,26 @@ public class RecursosService {
 
     public Color getColorTransparente() {
         return colorTransparente;
+    }
+
+    public Color getC1() {
+        return c1;
+    }
+
+    public Color getC2() {
+        return c2;
+    }
+
+    public Color getC3() {
+        return c3;
+    }
+
+    public Color getC4() {
+        return c4;
+    }
+
+    public Color getC5() {
+        return c5;
     }
 
     public Font getFontTProducto() {

@@ -49,7 +49,7 @@ public class FormularioCenso2020PanelTemplate extends JPanel {
         this.gbc = new GridBagConstraints();
 
         componentes();
-
+        this.setVisible(true);
     }
 
     private void componentes() {

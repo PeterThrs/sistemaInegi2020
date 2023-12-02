@@ -54,6 +54,7 @@ public class TablaCenso2020PanelTemplate extends JPanel {
         this.setLayout(new GridBagLayout());
 
         componentes();
+        this.setVisible(true);
     }
 
     private void componentes() {
