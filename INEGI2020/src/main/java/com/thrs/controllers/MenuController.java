@@ -44,6 +44,12 @@ public class MenuController implements ActionListener, MouseListener, FocusListe
         if (e.getSource() == menuTemplate.getBtnPoblacion()) {
             entrar(POBLACION_EDAD);
         }
+        if (e.getSource() == menuTemplate.getBtnPobEstado()) {
+            entrar(POBLACION_ESTADO);
+        }
+        if (e.getSource() == menuTemplate.getBtnTransaccion()) {
+            entrar(TRANSACCION);
+        }
         if (e.getSource() == menuTemplate.getBtnSalir()) {
             System.exit(0);
         }
@@ -72,9 +78,8 @@ public class MenuController implements ActionListener, MouseListener, FocusListe
             this.principalController.setComando(comando);
         } else {
             this.principalController.setComando(comando);
-            this.principalController.getPrincipalTemplate().setVisible(true);
-
         }
+        this.principalController.getPrincipalTemplate().setVisible(true);
 
         menuTemplate.setVisible(false);
     }

@@ -8,6 +8,7 @@ package com.thrs.controllers.tabla;
 import com.thrs.TableModels.ModelLocalidad;
 import com.thrs.controllers.PrincipalController;
 import com.thrs.models.Localidad;
+import com.thrs.repository.LocalidadDao;
 import com.thrs.services.LocalidadService;
 import com.thrs.vistas.panel.tabla.TablaLocalidadesPanelTemplate;
 import java.awt.event.ActionEvent;
@@ -27,7 +28,7 @@ public class TablaLocalidadesPanelController implements ActionListener, MouseLis
 
     private PrincipalController principalController;
     private TablaLocalidadesPanelTemplate tablaLocalidadesPanelTemplate;
-    private LocalidadService sLocalidad;
+    private LocalidadDao localidadDao;
     private List<Localidad> localidades;
     private Localidad localidad;
     private ModelLocalidad modelo;
@@ -35,7 +36,7 @@ public class TablaLocalidadesPanelController implements ActionListener, MouseLis
     public TablaLocalidadesPanelController(PrincipalController principalController) {
         this.principalController = principalController;
         this.tablaLocalidadesPanelTemplate = new TablaLocalidadesPanelTemplate(this);
-        this.sLocalidad = sLocalidad.getService();
+        this.localidadDao = new LocalidadDao();
 
         mostrarRegistrosTabla();
 
@@ -43,7 +44,7 @@ public class TablaLocalidadesPanelController implements ActionListener, MouseLis
 
     public void mostrarRegistrosTabla() {
         this.tablaLocalidadesPanelTemplate.getModelo().limpiarDatos();
-        localidades = sLocalidad.getLocalidades();
+        localidades = localidadDao.selectAll();
         
         this.tablaLocalidadesPanelTemplate.getModelo().agregarData(localidades);
 //        entidades.forEach(ent -> {

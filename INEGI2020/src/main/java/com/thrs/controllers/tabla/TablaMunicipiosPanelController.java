@@ -8,6 +8,7 @@ package com.thrs.controllers.tabla;
 import com.thrs.TableModels.ModelMunicipio;
 import com.thrs.controllers.PrincipalController;
 import com.thrs.models.Municipio;
+import com.thrs.repository.MunicipioDao;
 import com.thrs.services.MunicipioService;
 import com.thrs.vistas.panel.tabla.TablaMunicipiosPanelTemplate;
 import java.awt.event.ActionEvent;
@@ -27,7 +28,7 @@ public class TablaMunicipiosPanelController implements ActionListener, MouseList
 
     private PrincipalController principalController;
     private TablaMunicipiosPanelTemplate tablaMunicipiosPanelTemplate;
-    private MunicipioService sMunicipio;
+    private MunicipioDao municipioDao;
     private List<Municipio> municipios;
     private Municipio municipio;
     private ModelMunicipio modelo;
@@ -35,7 +36,7 @@ public class TablaMunicipiosPanelController implements ActionListener, MouseList
     public TablaMunicipiosPanelController(PrincipalController principalController) {
         this.principalController = principalController;
         this.tablaMunicipiosPanelTemplate = new TablaMunicipiosPanelTemplate(this);
-        this.sMunicipio = sMunicipio.getService();
+        this.municipioDao = new MunicipioDao();
 
         mostrarRegistrosTabla();
 
@@ -43,7 +44,7 @@ public class TablaMunicipiosPanelController implements ActionListener, MouseList
 
     public void mostrarRegistrosTabla() {
         this.tablaMunicipiosPanelTemplate.getModelo().limpiarDatos();
-        municipios = sMunicipio.getMunicipios();
+        municipios = municipioDao.selectAll();
         
         this.tablaMunicipiosPanelTemplate.getModelo().agregarData(municipios);
 //        entidades.forEach(ent -> {

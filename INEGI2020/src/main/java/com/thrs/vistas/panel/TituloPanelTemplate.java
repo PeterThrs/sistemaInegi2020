@@ -50,6 +50,7 @@ public class TituloPanelTemplate extends JPanel{
         this.sGraficosAvanzados = GraficosAvanzadosService.getService();
         
         componentes();
+        this.setVisible(true);
     }
     
     private void componentes(){

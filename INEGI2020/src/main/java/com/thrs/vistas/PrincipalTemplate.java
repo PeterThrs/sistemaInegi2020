@@ -39,6 +39,7 @@ public class PrincipalTemplate extends JFrame{
     private ObjGraficosService sObjGraficos;
     private GraficosAvanzadosService sGraficosAvanzados;
     private RecursosService sRecursos;
+    private JButton btnRegresar;
     
     private String indieFlower = "Indie Flower", jet = "JetBrains Mono";
     
@@ -64,8 +65,8 @@ public class PrincipalTemplate extends JFrame{
         this.sGraficosAvanzados = GraficosAvanzadosService.getService();
         
         //configuracion ventana al 100%
-        GraphicsEnvironment env = GraphicsEnvironment.getLocalGraphicsEnvironment();
-        Rectangle bounds = env.getMaximumWindowBounds();
+        //GraphicsEnvironment env = GraphicsEnvironment.getLocalGraphicsEnvironment();
+        //Rectangle bounds = env.getMaximumWindowBounds();
         ///this.setResizable(false);
         //this.setUndecorated(true);
         //this.setBounds(bounds);
@@ -74,15 +75,37 @@ public class PrincipalTemplate extends JFrame{
         
         componentes();
         
-        //this.setVisible(true);
+        this.setVisible(true);
     }
     
     private void componentes(){
         paneles();
+        botones();
     }
     
     public void setEstado(boolean estado){
         this.setVisible(estado);
+    }
+    
+    public void botones(){
+        // BOTÓN REGRESAR--------------------------------------------------------------------
+        btnRegresar = sObjGraficos.construirJButton(
+                "Regresar",
+                440, 145, 120, 35,
+                sRecursos.getCMano(),
+                null,
+                sRecursos.getFontMediana(),
+                sRecursos.getColorPrincipal(),
+                Color.WHITE,
+                null,
+                "c",
+                true
+        );
+        pBotones.setBackground(sRecursos.getColorGrisClaro());
+        btnRegresar.addMouseListener(principalController);
+        btnRegresar.addActionListener(principalController);
+        gbc = sObjGraficos.getGridBagConstraints(5, 1, 1, 1, 0, 0, GridBagConstraints.BOTH, GridBagConstraints.CENTER, new Insets(10, 10, 10, 10), 40, 10);
+        this.pBotones.add(btnRegresar, gbc);
     }
     
     private void paneles(){
@@ -106,7 +129,7 @@ public class PrincipalTemplate extends JFrame{
         
         //Creamos el panel de los datos
         pDatos = new JPanel();
-        pDatos.setBackground(Color.YELLOW);
+        pDatos.setBackground(Color.WHITE);
         pDatos.setBorder(BorderFactory.createEmptyBorder(0,0,0,0));
         gbc = sObjGraficos.getGridBagConstraints(0, 0, 1, 1, 0.3, 1, GridBagConstraints.BOTH, GridBagConstraints.CENTER, new Insets(0, 0, 0, 0), 0, 0);
         pDatos.setLayout(new GridBagLayout());
@@ -114,7 +137,7 @@ public class PrincipalTemplate extends JFrame{
         
         //Creamos el panel de la tabla
         pTabla = new JPanel();
-        pTabla.setBackground(Color.cyan);
+        pTabla.setBackground(Color.WHITE);
         pTabla.setBorder(BorderFactory.createEmptyBorder(0,0,0,0));
         gbc = sObjGraficos.getGridBagConstraints(1, 0, 1, 1, 0.7, 1, GridBagConstraints.BOTH, GridBagConstraints.CENTER, new Insets(0, 0, 0, 0), 0, 0);
         pTabla.setLayout(new GridBagLayout());
@@ -122,7 +145,7 @@ public class PrincipalTemplate extends JFrame{
         
         //Creamos el panel de los botones
         pBotones = new JPanel();
-        pBotones.setBackground(Color.GRAY);
+        pBotones.setBackground(sRecursos.getColorGrisClaro());
         pBotones.setBorder(BorderFactory.createEmptyBorder(0,0,0,0));
         gbc = sObjGraficos.getGridBagConstraints(0, 3, 1, 1, 1, 0.1, GridBagConstraints.BOTH, GridBagConstraints.CENTER, new Insets(0, 0, 0, 0), 0, 0);
         pBotones.setLayout(new GridBagLayout());
@@ -147,6 +170,10 @@ public class PrincipalTemplate extends JFrame{
 
     public JPanel getpBotones() {
         return pBotones;
+    }
+
+    public JPanel getpIntermedio() {
+        return pIntermedio;
     }
 
     public GridBagConstraints getGbc() {
@@ -196,7 +223,10 @@ public class PrincipalTemplate extends JFrame{
     public String getJet() {
         return jet;
     }
-    
+
+    public JButton getBtnRegresar() {
+        return btnRegresar;
+    }
     
     
 }

@@ -58,6 +58,7 @@ public class TablaPoblacionEdadPanelTemplate extends JPanel {
         this.setLayout(new GridBagLayout());
 
         componentes();
+        this.setVisible(true);
     }
 
     private void componentes() {
