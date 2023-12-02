@@ -14,6 +14,7 @@ import java.awt.GridBagLayout;
 import java.awt.Image;
 import java.awt.Insets;
 import javax.swing.BorderFactory;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -119,21 +120,20 @@ public class EstadosPanelTemplate extends JPanel {
 
         iAbajo = new ImageIcon("src/main/resources/img/abajo.png");
 
-        // Array con los estados de México
+        // Nombres de los estados en el orden deseado
         String[] estados = {
-            "Aguascalientes", "Baja California", "Baja California Sur", "Campeche", "Chiapas",
-            "Chihuahua", "Coahuila", "Colima", "Durango", "Guanajuato", "Guerrero", "Hidalgo",
-            "Jalisco", "México", "Michoacán", "Morelos", "Nayarit", "Nuevo León", "Oaxaca",
-            "Puebla", "Querétaro", "Quintana Roo", "San Luis Potosí", "Sinaloa", "Sonora",
-            "Tabasco", "Tamaulipas", "Tlaxcala", "Veracruz", "Yucatán", "Zacatecas"
+            "Nacional", "Aguascalientes", "Baja California", "Baja California Sur", "Campeche", "Coahuila de Zaragoza",
+            "Colima", "Chiapas", "Chihuahua", "Ciudad de México", "Durango", "Guanajuato", "Guerrero",
+            "Hidalgo", "Jalisco", "México", "Michoacán de Ocampo", "Morelos", "Nayarit", "Nuevo León",
+            "Oaxaca", "Puebla", "Querétaro", "Quintana Roo", "San Luis Potosí", "Sinaloa", "Sonora",
+            "Tabasco", "Tamaulipas", "Tlaxcala", "Veracruz de Ignacio de la Llave", "Yucatán", "Zacatecas"
         };
 
+        DefaultComboBoxModel<String> model = new DefaultComboBoxModel<>(estados);
+
+        // Crear un modelo de lista con los estados
         cbEstados = sObjGraficos.construirJComboBox(
-                "Aguascalientes_Baja California_Baja California Sur_Campeche_Chiapas_"
-                        + "Chihuahua_Coahuila_Colima_Durango_Guanajuato_Guerrero_Hidalgo_"
-                        + "Jalisco_México_Michoacán_Morelos_Nayarit_Nuevo León_Oaxaca_"
-                        + "Puebla_Querétaro_Quintana Roo_San Luis Potosí_Sinaloa_"
-                        + "Sonora_Tabasco_Tamaulipas_Tlaxcala_Veracruz_Yucatán_Zacatecas",
+                "Selecciona una entidad",
                 500 / 2, 210, 220, 100,
                 sRecursos.getFontLigera(),
                 Color.WHITE,
@@ -169,6 +169,7 @@ public class EstadosPanelTemplate extends JPanel {
         this.add(cbEstados);
 
         cbEstados.setForeground(Color.WHITE);
+        cbEstados.setModel(model);
 
         gbc = sObjGraficos.getGridBagConstraints(0, 1, 2, 1, 1, 1, GridBagConstraints.BOTH, GridBagConstraints.CENTER, new Insets(5, 0, 10, 0), 0, 0);
         this.pArriba.add(cbEstados, gbc);
@@ -845,8 +846,5 @@ public class EstadosPanelTemplate extends JPanel {
     public void setScroll(JScrollPane scroll) {
         this.scroll = scroll;
     }
-    
-    
-    
 
 }

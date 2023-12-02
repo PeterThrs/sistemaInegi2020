@@ -49,6 +49,7 @@ public class ConsultasBD {
             + "SUM(pob_masculina) as pob_masculina\n"
             + "FROM censo2020\n"
             + "INNER JOIN entidades ON censo2020.identidad = entidades.identidad \n"
+            + "WHERE entidades.identidad = ? "
             + "GROUP BY censo2020.identidad";
 
     private static final String SQL_SELECT_POB0A14 = "SELECT entidades.identidad, SUM(P_0A2_F) + SUM(P_0A2_M) + SUM(P_3A5_F) + SUM(P_3A5_M) + SUM(P_6A11_F) + SUM(P_6A11_M) + SUM(P_12A14_F) + SUM(P_12A14_M) as pob_total_0A14,\n"
@@ -56,12 +57,14 @@ public class ConsultasBD {
             + "SUM(P_0A2_M) + SUM(P_3A5_M) + SUM(P_6A11_M) + SUM(P_12A14_M) as total_hombres_0A14\n"
             + "FROM poblacion_edad\n"
             + "INNER JOIN entidades ON poblacion_edad.identidad = entidades.identidad \n"
+            + "WHERE entidades.identidad = ? "
             + "GROUP BY poblacion_edad.identidad;";
 
     private static final String SQL_SELECT_POB15A49 = "SELECT entidades.identidad, SUM(P_15A49_F)  as pob_total_15A49,\n"
             + "SUM(P_15A49_F) as total_mujeres_15A49\n"
             + "FROM poblacion_edad\n"
             + "INNER JOIN entidades ON poblacion_edad.identidad = entidades.identidad \n"
+            + "WHERE entidades.identidad = ? "
             + "GROUP BY poblacion_edad.identidad";
 
     private static final String SQL_SELECT_POB60YMAS = "SELECT entidades.identidad, SUM(P_60YMAS_F) + SUM(P_60YMAS_M) as pob_total_60YMAS,\n"
@@ -69,6 +72,7 @@ public class ConsultasBD {
             + "SUM(P_60YMAS_M) as total_hombres_60YMAS\n"
             + "FROM poblacion_edad\n"
             + "INNER JOIN entidades ON poblacion_edad.identidad = entidades.identidad \n"
+            + "WHERE entidades.identidad = ? "
             + "GROUP BY poblacion_edad.identidad";
     
     
@@ -257,53 +261,52 @@ public class ConsultasBD {
     
     // METODOS PARA LAS ENTIDADES ===============================================================================================
 
-    public static HashMap<String, Estado> obtenerPobEstado() {
+    public static Estado obtenerPobEstado(int id) {
         HashMap<String, Estado> mapa = new HashMap<>();
         Estado estado;
 
-        List<Estado> pobTotal = obtenerPobTotal();
-        List<Estado> pob0A14 = obtenerPob0A14();
-        List<Estado> pob15A49 = obtenerPob15A49();
-        List<Estado> pob60Ymas = obtenerPob60YMas();
-
-        for (int i = 0; i < pobTotal.size(); i++) {
+        Estado pobTotal = obtenerPobTotal(id);
+        Estado pob0A14 = obtenerPob0A14(id);
+        Estado pob15A49 = obtenerPob15A49(id);
+        Estado pob60Ymas = obtenerPob60YMas(id);
             estado = new Estado();
+            
+            if(pobTotal == null || pob0A14 == null || pob15A49 == null || pob60Ymas == null){
+                return estado;
+            }
 
-            estado.setIdEntidad(pobTotal.get(i).getIdEntidad());
-            estado.setEstado(pobTotal.get(i).getEstado());
-            estado.setPobTotal(pobTotal.get(i).getPobTotal());
-            estado.setTotalMujeres(pobTotal.get(i).getTotalMujeres());
-            estado.setTotalHombres(pobTotal.get(i).getTotalHombres());
+            estado.setIdEntidad(pobTotal.getIdEntidad());
+            estado.setEstado(pobTotal.getEstado());
+            estado.setPobTotal(pobTotal.getPobTotal());
+            estado.setTotalMujeres(pobTotal.getTotalMujeres());
+            estado.setTotalHombres(pobTotal.getTotalHombres());
 
-            estado.setPob0A14Total(pob0A14.get(i).getPob0A14Total());
-            estado.setPob0A14Mujeres(pob0A14.get(i).getPob0A14Mujeres());
-            estado.setPob0A14Hombres(pob0A14.get(i).getPob0A14Hombres());
+            estado.setPob0A14Total(pob0A14.getPob0A14Total());
+            estado.setPob0A14Mujeres(pob0A14.getPob0A14Mujeres());
+            estado.setPob0A14Hombres(pob0A14.getPob0A14Hombres());
 
-            estado.setPob15A49Total(pob15A49.get(i).getPob15A49Total());
-            estado.setPob15A49Mujeres(pob15A49.get(i).getPob15A49Mujeres());
-            estado.setPob15A49Hombres(pob15A49.get(i).getPob15A49Hombres());
+            estado.setPob15A49Total(pob15A49.getPob15A49Total());
+            estado.setPob15A49Mujeres(pob15A49.getPob15A49Mujeres());
+            estado.setPob15A49Hombres(pob15A49.getPob15A49Hombres());
 
-            estado.setPob60YMasTotal(pob60Ymas.get(i).getPob60YMasTotal());
-            estado.setPob60YMasMujeres(pob60Ymas.get(i).getPob60YMasMujeres());
-            estado.setPob60YMasHombres(pob60Ymas.get(i).getPob60YMasHombres());
-
-            mapa.put(pobTotal.get(i).getEstado().trim(), estado);
-
-        }
-
-        return mapa;
+            estado.setPob60YMasTotal(pob60Ymas.getPob60YMasTotal());
+            estado.setPob60YMasMujeres(pob60Ymas.getPob60YMasMujeres());
+            estado.setPob60YMasHombres(pob60Ymas.getPob60YMasHombres());
+            
+        return estado;
     }
 
-    public static List<Estado> obtenerPobTotal() {
+    public static Estado obtenerPobTotal(int id) {
         Connection coon = null;
         PreparedStatement stmt = null;
         ResultSet rs = null;
         Estado estado = null;
-        List<Estado> listaEstados = new ArrayList<>();
+        //List<Estado> listaEstados = new ArrayList<>();
 
         try {
             coon = getConnection();
             stmt = coon.prepareStatement(SQL_SELECT_POB_TOTAL);
+            stmt.setInt(1, id);
             rs = stmt.executeQuery();
 
             while (rs.next()) {
@@ -320,7 +323,7 @@ public class ConsultasBD {
                 estado.setTotalMujeres(pobFemenina);
                 estado.setTotalHombres(pobMasculina);
 
-                listaEstados.add(estado);
+                //listaEstados.add(estado);
 
             }
         } catch (SQLException ex) {
@@ -335,20 +338,21 @@ public class ConsultasBD {
             }
         }
 
-        return listaEstados;
+        return estado;
 
     }
 
-    public static List<Estado> obtenerPob0A14() {
+    public static Estado obtenerPob0A14(int id) {
         Connection coon = null;
         PreparedStatement stmt = null;
         ResultSet rs = null;
         Estado estado = null;
-        List<Estado> listaEstados = new ArrayList<>();
+        //List<Estado> listaEstados = new ArrayList<>();
 
         try {
             coon = getConnection();
             stmt = coon.prepareStatement(SQL_SELECT_POB0A14);
+            stmt.setInt(1, id);
             rs = stmt.executeQuery();
 
             while (rs.next()) {
@@ -363,7 +367,7 @@ public class ConsultasBD {
                 estado.setPob0A14Mujeres(pobFemenina);
                 estado.setPob0A14Hombres(pobMasculina);
 
-                listaEstados.add(estado);
+                //listaEstados.add(estado);
 
             }
         } catch (SQLException ex) {
@@ -378,20 +382,21 @@ public class ConsultasBD {
             }
         }
 
-        return listaEstados;
+        return estado;
 
     }
 
-    public static List<Estado> obtenerPob15A49() {
+    public static Estado obtenerPob15A49(int id) {
         Connection coon = null;
         PreparedStatement stmt = null;
         ResultSet rs = null;
         Estado estado = null;
-        List<Estado> listaEstados = new ArrayList<>();
+        //List<Estado> listaEstados = new ArrayList<>();
 
         try {
             coon = getConnection();
             stmt = coon.prepareStatement(SQL_SELECT_POB15A49);
+            stmt.setInt(1, id);
             rs = stmt.executeQuery();
 
             while (rs.next()) {
@@ -404,7 +409,7 @@ public class ConsultasBD {
                 estado.setPob15A49Total(pobTotal);
                 estado.setPob15A49Mujeres(pobFemenina);
 
-                listaEstados.add(estado);
+                //listaEstados.add(estado);
 
             }
         } catch (SQLException ex) {
@@ -419,20 +424,21 @@ public class ConsultasBD {
             }
         }
 
-        return listaEstados;
+        return estado;
 
     }
 
-    public static List<Estado> obtenerPob60YMas() {
+    public static Estado obtenerPob60YMas(int id) {
         Connection coon = null;
         PreparedStatement stmt = null;
         ResultSet rs = null;
         Estado estado = null;
-        List<Estado> listaEstados = new ArrayList<>();
+        //List<Estado> listaEstados = new ArrayList<>();
 
         try {
             coon = getConnection();
             stmt = coon.prepareStatement(SQL_SELECT_POB60YMAS);
+            stmt.setInt(1, id);
             rs = stmt.executeQuery();
 
             while (rs.next()) {
@@ -447,7 +453,7 @@ public class ConsultasBD {
                 estado.setPob60YMasMujeres(pobFemenina);
                 estado.setPob60YMasHombres(pobMasculina);
 
-                listaEstados.add(estado);
+                //listaEstados.add(estado);
 
             }
         } catch (SQLException ex) {
@@ -462,7 +468,7 @@ public class ConsultasBD {
             }
         }
 
-        return listaEstados;
+        return estado;
 
     }
 

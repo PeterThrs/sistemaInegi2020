@@ -4,7 +4,6 @@
  */
 package com.thrs.controllers.formularios;
 
-import com.sun.security.auth.PrincipalComparator;
 import com.thrs.controllers.PrincipalController;
 import com.thrs.models.Entidad;
 import com.thrs.models.consultas.Estado;
@@ -16,15 +15,12 @@ import com.thrs.services.graphicServices.RecursosService;
 import com.thrs.vistas.Grafico;
 import com.thrs.vistas.panel.EstadosPanelTemplate;
 import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.security.Principal;
 import java.util.HashMap;
 import java.util.List;
 import javax.swing.JComboBox;
@@ -59,10 +55,10 @@ public class EstadosController implements ActionListener, MouseListener, FocusLi
         this.sRecursos = RecursosService.getService();
         this.sGraficosAvanzados = GraficosAvanzadosService.getService();
         
-        this.estados = consulta.obtenerPobEstado();
         this.estadoNacional = consulta.obtenerPobNacional();
+        actualizarInfoNacional();
 
-        cargarJComboBox();
+        //cargarJComboBox();
 
     }
 
@@ -84,28 +80,26 @@ public class EstadosController implements ActionListener, MouseListener, FocusLi
     public void actionPerformed(ActionEvent e) {
 
         if (e.getSource() == estadosPanelTemplate.getCbEstados()) {
-            String opcionSeleccionada = ((String) estadosPanelTemplate.getCbEstados().getSelectedItem());
-            if (opcionSeleccionada != null) {
-                actulizarInfo(opcionSeleccionada);
+            //String opcionSeleccionada = ((String) estadosPanelTemplate.getCbEstados().getSelectedItem());
+            int idEntidad = estadosPanelTemplate.getCbEstados().getSelectedIndex();
+            if (idEntidad != 0) {
+                actulizarInfo(idEntidad);
             }
             
-            if(opcionSeleccionada == nacional){
+            if(idEntidad == 0){
                 actualizarInfoNacional();
             }
         }
 
     }
 
-    public void actulizarInfo(String opcionSeleccionada) {
-
-        if (opcionSeleccionada == null) {
-            return;
-        }
-        Estado estado = estados.get(opcionSeleccionada);
+    public void actulizarInfo(int idEntidad) {
+        
+        Estado estado = consulta.obtenerPobEstado(idEntidad);
         
         if(estado == null) return;
         
-        System.out.println("estado = " + estado);
+        //System.out.println("estado = " + estado);
         
         
         estadosPanelTemplate.getlValorPobTotal().setText("" + estado.getPobTotal());

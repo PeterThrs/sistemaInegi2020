@@ -9,6 +9,7 @@ import com.thrs.services.graphicServices.GraficosAvanzadosService;
 import com.thrs.services.graphicServices.ObjGraficosService;
 import com.thrs.services.graphicServices.RecursosService;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.GraphicsEnvironment;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -50,6 +51,7 @@ public class PrincipalTemplate extends JFrame{
         
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setSize(1000, 600);
+        this.setMinimumSize(new Dimension(1000,600));
         this.setLocationRelativeTo(null);
         
         this.colorPrincipal = new Color(39,54,77);
@@ -75,7 +77,7 @@ public class PrincipalTemplate extends JFrame{
         
         componentes();
         
-        this.setVisible(true);
+        //this.setVisible(true);
     }
     
     private void componentes(){
