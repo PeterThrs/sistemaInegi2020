@@ -34,8 +34,9 @@ public class ConsultasBD {
             + "SUM(P_0A2_F) + SUM(P_3A5_F) + SUM(P_6A11_F) + SUM(P_12A14_F) as total_mujeres_0A14,\n"
             + "SUM(P_0A2_M) + SUM(P_3A5_M) + SUM(P_6A11_M) + SUM(P_12A14_M) as total_hombres_0A14\n"
             + "FROM poblacion_edad;";
-    private static final String SQL_SELECT_POB15A49_NACIONAL = "SELECT SUM(P_15A49_F)  as pob_total_15A49,\n"
-            + "SUM(P_15A49_F) as total_mujeres_15A49\n"
+    private static final String SQL_SELECT_POB15A49_NACIONAL = "SELECT SUM(P_15A49_F) + SUM(P_15A17_M+P_18A24_M)  as pob_total_15A49,\n"
+            + "SUM(P_15A49_F) as total_mujeres_15A49,\n"
+            + "SUM(P_15A17_M+P_18A24_M) as total_hombres_15A49\n"
             + "FROM poblacion_edad;";
     private static final String SQL_SELECT_POB60YMAS_NACIONAL = "SELECT SUM(P_60YMAS_F) + SUM(P_60YMAS_M) as pob_total_60YMAS,\n"
             + "SUM(P_60YMAS_F) as total_mujeres_60YMAS,\n"
@@ -60,8 +61,9 @@ public class ConsultasBD {
             + "WHERE entidades.identidad = ? "
             + "GROUP BY poblacion_edad.identidad;";
 
-    private static final String SQL_SELECT_POB15A49 = "SELECT entidades.identidad, SUM(P_15A49_F)  as pob_total_15A49,\n"
-            + "SUM(P_15A49_F) as total_mujeres_15A49\n"
+    private static final String SQL_SELECT_POB15A49 = "SELECT entidades.identidad, SUM(P_15A49_F) + SUM(P_15A17_M+P_18A24_M)  as pob_total_15A49,\n"
+            + "SUM(P_15A49_F) as total_mujeres_15A49,\n"
+            + "SUM(P_15A17_M+P_18A24_M) as total_hombres_15A49\n"
             + "FROM poblacion_edad\n"
             + "INNER JOIN entidades ON poblacion_edad.identidad = entidades.identidad \n"
             + "WHERE entidades.identidad = ? "
@@ -197,10 +199,12 @@ public class ConsultasBD {
             while (rs.next()) {
                 int pobTotal = rs.getInt("pob_total_15A49");
                 int pobFemenina = rs.getInt("total_mujeres_15A49");
+                int pobMasculina = rs.getInt("total_hombres_15A49");
 
                 estado = new Estado();
                 estado.setPob15A49Total(pobTotal);
                 estado.setPob15A49Mujeres(pobFemenina);
+                estado.setPob15A49Hombres(pobMasculina);
                 
             }
         } catch (SQLException ex) {
@@ -403,11 +407,13 @@ public class ConsultasBD {
                 int idEntidad = rs.getInt("identidad");
                 int pobTotal = rs.getInt("pob_total_15A49");
                 int pobFemenina = rs.getInt("total_mujeres_15A49");
+                int pobHombres = rs.getInt("total_hombres_15A49");
 
                 estado = new Estado();
                 estado.setIdEntidad(idEntidad);
                 estado.setPob15A49Total(pobTotal);
                 estado.setPob15A49Mujeres(pobFemenina);
+                estado.setPob15A49Hombres(pobHombres);
 
                 //listaEstados.add(estado);
 

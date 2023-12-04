@@ -51,6 +51,7 @@ E:\PeterCursos\ProyectosControladosGit\sistemaInegi2020\INEGI2020\src\main\java\
 E:\PeterCursos\ProyectosControladosGit\sistemaInegi2020\INEGI2020\src\main\java\com\thrs\repository\EntidadDao.java
 E:\PeterCursos\ProyectosControladosGit\sistemaInegi2020\INEGI2020\src\main\java\com\thrs\controllers\formularios\FormularioMunicipiosPanelController.java
 E:\PeterCursos\ProyectosControladosGit\sistemaInegi2020\INEGI2020\src\main\java\com\thrs\pruebaLocalidades.java
+E:\PeterCursos\ProyectosControladosGit\sistemaInegi2020\INEGI2020\src\main\java\com\thrs\Main.java
 E:\PeterCursos\ProyectosControladosGit\sistemaInegi2020\INEGI2020\src\main\java\com\thrs\repository\MunicipioDao.java
 E:\PeterCursos\ProyectosControladosGit\sistemaInegi2020\INEGI2020\src\main\java\com\thrs\vistas\panel\EstadosPanelTemplate.java
 E:\PeterCursos\ProyectosControladosGit\sistemaInegi2020\INEGI2020\src\main\java\com\thrs\repository\PoblacionEdadDao.java
@@ -61,7 +62,6 @@ E:\PeterCursos\ProyectosControladosGit\sistemaInegi2020\INEGI2020\src\main\java\
 E:\PeterCursos\ProyectosControladosGit\sistemaInegi2020\INEGI2020\src\main\java\com\thrs\controllers\formularios\FormularioPoblacionEdadPanelController.java
 E:\PeterCursos\ProyectosControladosGit\sistemaInegi2020\INEGI2020\src\main\java\com\thrs\transaccional\EncargadoTransacciones.java
 E:\PeterCursos\ProyectosControladosGit\sistemaInegi2020\INEGI2020\src\main\java\com\thrs\models\Municipio.java
-E:\PeterCursos\ProyectosControladosGit\sistemaInegi2020\INEGI2020\src\main\java\com\thrs\controllers\main\Main.java
 E:\PeterCursos\ProyectosControladosGit\sistemaInegi2020\INEGI2020\src\main\java\com\thrs\models\consultas\Estado.java
 E:\PeterCursos\ProyectosControladosGit\sistemaInegi2020\INEGI2020\src\main\java\com\thrs\services\logicServices\ProductoService.java
 E:\PeterCursos\ProyectosControladosGit\sistemaInegi2020\INEGI2020\src\main\java\com\thrs\controllers\MenuController.java

@@ -11,7 +11,9 @@ import com.thrs.services.graphicServices.RecursosService;
 import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.Image;
 import java.awt.Insets;
+import java.awt.Toolkit;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -40,10 +42,15 @@ public class MenuTemplate extends JFrame {
     private RecursosService sRecursos;
 
     private String indieFlower = "Indie Flower", jet = "JetBrains Mono";
+    private Image image;
 
     public MenuTemplate(MenuController menuController) {
 
         this.menuController = menuController;
+        
+        image = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/img/imgRobot.png"));
+        this.setTitle("INEGI2020");
+        this.setIconImage(image);
 
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setSize(1000, 600);

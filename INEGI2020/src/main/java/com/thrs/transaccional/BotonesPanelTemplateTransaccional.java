@@ -60,8 +60,8 @@ public class BotonesPanelTemplateTransaccional extends JPanel {
     }
     
     public void crearCombo(){
-    
-        iAbajo = new ImageIcon("src/main/resources/img/abajo.png");
+    //getClass().getResource("/img/abajo.png")
+        iAbajo = new ImageIcon(getClass().getResource("/img/abajo.png"));
 
         cbVentanas = sObjGraficos.construirJComboBox(
                 "Opciones a Elegir",

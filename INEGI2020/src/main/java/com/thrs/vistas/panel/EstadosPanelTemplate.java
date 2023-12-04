@@ -117,8 +117,8 @@ public class EstadosPanelTemplate extends JPanel {
     }
 
     public void crearJComboBoxes() {
-
-        iAbajo = new ImageIcon("src/main/resources/img/abajo.png");
+        //getClass().getResource("/img/abajo.png")
+        iAbajo = new ImageIcon(getClass().getResource("/img/abajo.png"));
 
         // Nombres de los estados en el orden deseado
         String[] estados = {

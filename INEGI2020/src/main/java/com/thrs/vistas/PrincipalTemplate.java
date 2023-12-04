@@ -13,8 +13,10 @@ import java.awt.Dimension;
 import java.awt.GraphicsEnvironment;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.Image;
 import java.awt.Insets;
 import java.awt.Rectangle;
+import java.awt.Toolkit;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -43,11 +45,15 @@ public class PrincipalTemplate extends JFrame{
     private JButton btnRegresar;
     
     private String indieFlower = "Indie Flower", jet = "JetBrains Mono";
+    private Image image;
     
     
     public PrincipalTemplate(PrincipalController principalController){
         
         this.principalController = principalController;
+        image = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/img/imgRobot.png"));
+        this.setTitle("INEGI2020");
+        this.setIconImage(image);
         
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setSize(1000, 600);
@@ -65,7 +71,6 @@ public class PrincipalTemplate extends JFrame{
         this.sObjGraficos = ObjGraficosService.getService();
         this.sRecursos = RecursosService.getService();
         this.sGraficosAvanzados = GraficosAvanzadosService.getService();
-        
         //configuracion ventana al 100%
         //GraphicsEnvironment env = GraphicsEnvironment.getLocalGraphicsEnvironment();
         //Rectangle bounds = env.getMaximumWindowBounds();
